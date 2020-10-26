@@ -83,12 +83,26 @@ public class SBBMain
   {
     // Initialize some things.
     initializeJFrame();
+//	    Scanner sc = new Scanner(System.in);
+//	    System.out.print("id : ");
+//	    String id = sc.nextLine();
+//	    System.out.print("nickname : ");
+//	    String nickname = sc.nextLine();
+//	    System.out.print("pw : ");
+//	    String pw = sc.nextLine();
+//	    UDao dao = new UDao();
+//	    JoinDto dto = new JoinDto(id, nickname, pw);
+//	    int rn = dao.join(dto);
+//	    System.out.println("rn : " + rn);
     new MakeUI1();
+    //new GameOver();
     moveEngine.start();
     makeMainScene.start();
     runAnimation();
+    
   }
-  
+
+
   public static void runAnimation()
   {
     // Set up some variables.
@@ -112,6 +126,7 @@ public class SBBMain
         ++frames;
         // clear back buffer...
         g2d = buffer.createGraphics();
+        //g2d.fillRect(0, 0, X, Y);
         if(sceneNum==1 || sceneNum==4 || sceneNum==7) g2d.drawImage(background.get(0), 0,0, null);
         else if(sceneNum==2 || sceneNum==5 || sceneNum==6) g2d.drawImage(background.get(1), 0,0, null);
         else if(sceneNum==3 || sceneNum==8) g2d.drawImage(background.get(2), 0,0, null);
@@ -122,7 +137,8 @@ public class SBBMain
           try {
         	  at.translate(living.get(i).getX(), living.get(i).getY());
         	  Spawn s = living.get(i);
-              if(s instanceof SpawnBall) {
+              if(s instanceof SpawnBall) { 
+            	  //g2d.drawImage(sibaball,(int) (s.getX() ),(int) (s.getY() ), c);
             	  g2d.drawImage(sibaball2,(int) (s.getX() )+4,(int) (s.getY() ), c);
               }
               else if(s instanceof SpawnWall){
