@@ -26,6 +26,7 @@ import Objects.*;
 import Scenes.*;
 import dao.UDao;
 import dto.JoinDto;
+import service.UserService;
 
 public class SBBMain
 {
@@ -83,17 +84,17 @@ public class SBBMain
   {
     // Initialize some things.
     initializeJFrame();
-//	    Scanner sc = new Scanner(System.in);
-//	    System.out.print("id : ");
-//	    String id = sc.nextLine();
-//	    System.out.print("nickname : ");
-//	    String nickname = sc.nextLine();
-//	    System.out.print("pw : ");
-//	    String pw = sc.nextLine();
-//	    UDao dao = new UDao();
-//	    JoinDto dto = new JoinDto(id, nickname, pw);
-//	    int rn = dao.join(dto);
-//	    System.out.println("rn : " + rn);
+	    Scanner sc = new Scanner(System.in);
+	    System.out.print("id : ");
+	    String id = sc.nextLine();
+	    System.out.print("nickname : ");
+	    String nickname = sc.nextLine();
+	    System.out.print("pw : ");
+	    String pw = sc.nextLine();
+	    UserService us = new UserService();
+	    JoinDto dto = new JoinDto(id, nickname, pw);
+	    int rn = us.join(dto);
+	    System.out.println("rn : " + rn);
     new MakeUI1();
     //new GameOver();
     moveEngine.start();
@@ -183,8 +184,8 @@ public class SBBMain
            * Wall
            * Jump
            * Thorn
-           * Item1 : 대쉬
-           * Item2 : 점프
+           * Item1 : ���돩
+           * Item2 : �젏�봽
            * Star
            * Breakable
            * MoveL
@@ -247,12 +248,12 @@ public class SBBMain
   }
   
 
-  //awt패키지     : native OS의 GUI 도움받아 작동(중량 컴포넌트) -> OS에따라 GUI다름
-  //swing패키지 : JAVA언어로 이루어짐 (경량 컴포넌트) -> GUI가 어떤 OS에서도 동일. 호환성좋음 J로 시작
-  //paint => 랜더링 함수
-  //update => AWT 엔진이 윈도우 데미지 입었을 때, 사용하는 paint를 호출하는 메서드
-  //repaint => 외부에서 AWT 엔진한테 update(g) 좀 사용하라고 요청하는 메서드
-  //패널을 추가했다던가, 버튼을 추가했다던가 하면 repaint를 통해 다시 그려줘서 frame에 표시할 수 있음.
+  //awt�뙣�궎吏�     : native OS�쓽 GUI �룄��諛쏆븘 �옉�룞(以묐웾 而댄룷�꼳�듃) -> OS�뿉�뵲�씪 GUI�떎由�
+  //swing�뙣�궎吏� : JAVA�뼵�뼱濡� �씠猷⑥뼱吏� (寃쎈웾 而댄룷�꼳�듃) -> GUI媛� �뼱�뼡 OS�뿉�꽌�룄 �룞�씪. �샇�솚�꽦醫뗭쓬 J濡� �떆�옉
+  //paint => �옖�뜑留� �븿�닔
+  //update => AWT �뿏吏꾩씠 �쐢�룄�슦 �뜲誘몄� �엯�뿀�쓣 �븣, �궗�슜�븯�뒗 paint瑜� �샇異쒗븯�뒗 硫붿꽌�뱶
+  //repaint => �쇅遺��뿉�꽌 AWT �뿏吏꾪븳�뀒 update(g) 醫� �궗�슜�븯�씪怨� �슂泥��븯�뒗 硫붿꽌�뱶
+  //�뙣�꼸�쓣 異붽��뻽�떎�뜕媛�, 踰꾪듉�쓣 異붽��뻽�떎�뜕媛� �븯硫� repaint瑜� �넻�빐 �떎�떆 洹몃젮以섏꽌 frame�뿉 �몴�떆�븷 �닔 �엳�쓬.
   
   private static void setImages()
   {
@@ -283,16 +284,16 @@ public class SBBMain
   private static void initializeJFrame()
   {
     // Create the frame...
-    f = new JFrame(TITLE); // 프레임
+    f = new JFrame(TITLE); // �봽�젅�엫
     
     keyListener = new MyKeyListener();
     
     f.addKeyListener(keyListener);
-    f.setIgnoreRepaint(false); // 더블버퍼 관련, repaint()를 막는 메소드
-    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 화면종료시 어플리케이션 종료시킴. (Console에서 작동종료.)
+    f.setIgnoreRepaint(false); // �뜑釉붾쾭�띁 愿��젴, repaint()瑜� 留됰뒗 硫붿냼�뱶
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // �솕硫댁쥌猷뚯떆 �뼱�뵆由ъ��씠�뀡 醫낅즺�떆�궡. (Console�뿉�꽌 �옉�룞醫낅즺.)
     // Create canvas for painting...
-    c = new Canvas(); // 화면
-    // 캔버스를 새로 만드는거.
+    c = new Canvas(); // �솕硫�
+    // 罹붾쾭�뒪瑜� �깉濡� 留뚮뱶�뒗嫄�.
     c.setIgnoreRepaint(true);
     c.setSize(X, Y);
     
@@ -367,14 +368,14 @@ public class SBBMain
 	f.setFocusable(true);
 	// Add the canvas, and display.
 	f.add(c);
-	f.pack(); // 창크기 Canvas에 맞게 해줌
-	f.setLocationRelativeTo(null); // 실행시 window frame을 screen 중앙으로
+	f.pack(); // 李쏀겕湲� Canvas�뿉 留욊쾶 �빐以�
+	f.setLocationRelativeTo(null); // �떎�뻾�떆 window frame�쓣 screen 以묒븰�쑝濡�
 	f.setVisible(false);
 
 	// Set up the BufferStrategy for double buffering.
 	c.createBufferStrategy(2);
 	b = c.getBufferStrategy();
-	// Get graphics configuration...(그래픽 환경)
+	// Get graphics configuration...(洹몃옒�뵿 �솚寃�)
 	ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	gd = ge.getDefaultScreenDevice();
 	gc = gd.getDefaultConfiguration();

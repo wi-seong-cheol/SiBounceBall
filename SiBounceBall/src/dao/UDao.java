@@ -4,42 +4,44 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
+import conn.DBConnector;
 import dto.JoinDto;
 import dto.LoginDto;
 import dto.UserDto;
 
 public class UDao {
 
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-
-	public UDao() {
-
-		try {
-
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("driver load success!");
-
-		} catch (Exception e) {
-			System.out.println("errer in UDao() : ");
-			e.printStackTrace();
+	private static UDao dao;
+	private DBConnector dbc = DBConnector.getInstance();
+	
+	Connection conn;
+	PreparedStatement pstmt;
+	ResultSet rs;
+	
+	private UDao() {}
+	
+	public static UDao getInstance() {
+		if(dao == null) {
+			dao = new UDao();
 		}
-
+		return dao;
 	}
+	
+	public int join(JoinDto dto) throws Exception, SQLException{
 
-	public int join(JoinDto dto) {
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
 		int rn = 0;
+		
 
 		try {
 
-			conn = DriverManager.getConnection(url, "scott", "tiger");
-			System.out.println("DB conn success!");
-
+			conn = dbc.getConnection();
 			String query = "insert into users (id, nickname, pw) values (?, ?, ?)";
+			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getNickname());
@@ -49,24 +51,14 @@ public class UDao {
 
 		} catch (SQLIntegrityConstraintViolationException e) {
 			rn = 0;
-		} catch (Exception e1) {
-			System.out.println("errer in join() - e1 : ");
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e2) {
-				System.out.println("errer in join() - e2 : ");
-				e2.printStackTrace();
-			}
-		}
+		} 
+		
+		disconnect();
 
 		return rn;
 	}// join()
-
+	
+/*
 	public int login(LoginDto dto) {
 
 		Connection conn = null;
@@ -252,5 +244,12 @@ public class UDao {
 				e2.printStackTrace();
 			}
 		}
+	}
+	*/
+	
+	public void disconnect() throws SQLException {
+		if(rs != null) rs.close();
+		pstmt.close();
+		conn.close();
 	}
 }
