@@ -90,9 +90,9 @@ class MakeUI1 extends JFrame {
             		nickName = nickNameField.getText();
             		id = idField.getText();
             		pw = pwField.getText();
-            		UDao dao = new UDao();
-            	    JoinDto dto = new JoinDto(nickName, id, pw);
-            	    int rn = dao.join(dto);
+//            		UDao dao = new UDao();
+//            	    JoinDto dto = new JoinDto(nickName, id, pw);
+//            	    int rn = dao.join(dto);
             		//textField 초기화 
             		nickNameField.setText(null);
             		idField.setText(null);
@@ -104,16 +104,17 @@ class MakeUI1 extends JFrame {
             		id = idField.getText();
             		SBBMain.id = id;
             		pw = pwField.getText();
-            		UDao dao = new UDao();
-            	    LoginDto dto = new LoginDto(id, pw);
-            	    int rn = user.login(dto);
+//            		UDao dao = new UDao();
+//            	    LoginDto dto = new LoginDto(id, pw);
+//            	    int rn = user.login(dto);
+            		int rn = 1;
 
         			SBBMain.login = rn;
             	    nickNameField.setText(null);
             		idField.setText(null);
             		pwField.setText(null);
             		if(rn == 1) {
-            			SBBMain.higestLevel = user.getHighestLevel(id);
+//            			SBBMain.higestLevel = user.getHighestLevel(id);
             			startButton.setVisible(true);
             			manual.setVisible(true);
                 		idField.setVisible(false);
