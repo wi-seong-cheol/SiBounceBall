@@ -8,30 +8,59 @@ import dto.UserDto;
 public class UserService {
 
 	public int join(JoinDto dto) {
-		UDao dao = new UDao();
-		return dao.join(dto); // 1: 회원가입 성공   |  0 : 중복된 아이디 존재  	
+		int r = 0;
+		try {
+			r = UDao.getInstance().join(dto);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return r; // 1: success  |  0 : fail 	
 	}
 	
 	public int login(LoginDto dto) {
-		UDao dao = new UDao();
-		return dao.login(dto); // 1 : 로그인 성공   |  0 : pw가 틀림   |  -1 : id 존재하지 않음
+		int r = 0;
+		try {
+			r = UDao.getInstance().login(dto);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return r; // 1 : success  |  0 : wrong pw   |  -1 : wrong id
 	}
 	
 	public UserDto getUserInfo(String id) { 
-		UDao dao = new UDao();
-		return dao.userInfo(id);
+		UserDto dto = null;
+		try {
+			dto = UDao.getInstance().userInfo(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
+	
 	public int getHighestLevel(String id) {
-	    UDao dao = new UDao();
-	    return dao.getHighestLevel(id);
+		UserDto dto = null;
+		try {
+			dto = UDao.getInstance().userInfo(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dto.getStage();
 	}
-	   
-	public void updateHighestLevel(String id) { // 현재 highestLevel++
-	    UDao dao = new UDao();
-	    dao.getHighestLevel(id);
+	
+	public void updateHighestLevel(String id) { // highestLevel++
+	    try {
+	    	UDao.getInstance().updateHighestLevel(id);
+	    } catch(Exception e) {
+	    	e.printStackTrace();
+	    }
 	}
-	public void updateHighestLevel(String id, int level) { // 현재 highestLevel을 level 로 업데이트
-	    UDao dao = new UDao();
-	    dao.updateHighestLevel(id, level);
+	
+	public void updateHighestLevel(String id, int level) { // update highestLevel to 'level'
+		try {
+	    	UDao.getInstance().updateHighestLevel(id, level);
+	    } catch(Exception e) {
+	    	e.printStackTrace();
+	    }
 	}
+	
 }
