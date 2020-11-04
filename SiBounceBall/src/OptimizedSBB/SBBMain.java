@@ -20,15 +20,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import java.util.Scanner;
+
 
 import Objects.*;
 import Scenes.*;
-import dao.UDao;
-import dto.JoinDto;
-import dto.LoginDto;
-import dto.UserDto;
-import service.UserService;
+
 
 public class SBBMain
 {
@@ -86,15 +82,7 @@ public class SBBMain
   {
     // Initialize some things.
     initializeJFrame();
-	    Scanner sc = new Scanner(System.in);
-	    System.out.print("id : ");
-	    String id = sc.nextLine();
-//	    System.out.print("pw : ");
-//	    String pw = sc.nextLine();
-	    UserService us = new UserService();
-	    UserDto dto = null;
-	    dto = us.getUserInfo(id);
-	    System.out.println(dto.getStage());
+
     new MakeUI1();
     //new GameOver();
     moveEngine.start();

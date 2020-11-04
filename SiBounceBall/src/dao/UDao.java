@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -107,6 +106,7 @@ public class UDao {
 
 		return dto;
 	}
+	
 /*
 	public int getHighestLevel(String id) {
 		int rsLevel = 1;
@@ -145,67 +145,42 @@ public class UDao {
 
 		return rsLevel;
 	}
-	
-	public void updateHighestLevel(String id, int level) {
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			conn = DriverManager.getConnection(url, "scott", "tiger");
-			String query = "update users set hLevel = ? where id = ?";
-			pstmt = conn.prepareStatement(query);
-
-			pstmt.setInt(1, level);
-			pstmt.setString(2, id);
-
-			int rn = pstmt.executeUpdate();
-
-		} catch (Exception e1) {
-			System.out.println("errer in updateHighestLevel(id, level) - e1 : ");
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					pstmt.close();
-			} catch (Exception e2) {
-				System.out.println("errer in updateHighestLevel(id, level) - e1 : ");
-				e2.printStackTrace();
-			}
-		}
-	}
-
-	public void updateHighestLevel(String id) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			conn = DriverManager.getConnection(url, "scott", "tiger");
-			String query = "update users set hLevel = hLevel + 1 where id = ?";
-			pstmt = conn.prepareStatement(query);
-
-			pstmt.setString(1, id);
-
-			int rn = pstmt.executeUpdate();
-
-		} catch (Exception e1) {
-			System.out.println("errer in updateHighestLevel(id) - e1 : ");
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					pstmt.close();
-			} catch (Exception e2) {
-				System.out.println("errer in updateHighestLevel(id) - e1 : ");
-				e2.printStackTrace();
-			}
-		}
-	}
 	*/
+	
+	public void updateHighestLevel(String id, int level) throws Exception, SQLException {
+
+		conn = dbc.getConnection();
+		
+		String query = "update users set hLevel = ? where id = ?";
+			
+		pstmt = conn.prepareStatement(query);
+		pstmt.setInt(1, level);
+		pstmt.setString(2, id);
+
+		int rn = pstmt.executeUpdate();
+		System.out.println(rn);
+		
+		disconnect();
+		
+	}
+
+	
+	public void updateHighestLevel(String id) throws Exception, SQLException {
+
+		conn = dbc.getConnection();
+			
+		String query = "update users set hLevel = hLevel + 1 where id = ?";
+			
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, id);
+
+		int rn = pstmt.executeUpdate();
+		System.out.println(rn);
+		
+		disconnect();
+
+	}
+
 	
 	public void disconnect() throws SQLException {
 		if(rs != null) rs.close();

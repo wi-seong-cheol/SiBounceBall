@@ -46,14 +46,21 @@ public class UserService {
 		}
 		return dto.getStage();
 	}
-	/*   
-	public void updateHighestLevel(String id) { // �쁽�옱 highestLevel++
-	    UDao dao = new UDao();
-	    dao.getHighestLevel(id);
+	
+	public void updateHighestLevel(String id) { // highestLevel++
+	    try {
+	    	UDao.getInstance().updateHighestLevel(id);
+	    } catch(Exception e) {
+	    	e.printStackTrace();
+	    }
 	}
-	public void updateHighestLevel(String id, int level) { // �쁽�옱 highestLevel�쓣 level 濡� �뾽�뜲�씠�듃
-	    UDao dao = new UDao();
-	    dao.updateHighestLevel(id, level);
+	
+	public void updateHighestLevel(String id, int level) { // update highestLevel to 'level'
+		try {
+	    	UDao.getInstance().updateHighestLevel(id, level);
+	    } catch(Exception e) {
+	    	e.printStackTrace();
+	    }
 	}
-	*/
+	
 }
