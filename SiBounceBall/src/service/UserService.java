@@ -14,15 +14,20 @@ public class UserService {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return r;// 1: success  |  0 : fail 	
+		return r; // 1: success  |  0 : fail 	
+	}
+	
+	public int login(LoginDto dto) {
+		int r = 0;
+		try {
+			r = UDao.getInstance().login(dto);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return r; // 1 : success  |  0 : wrong pw   |  -1 : wrong id
 	}
 	
 	/*
-	public int login(LoginDto dto) {
-		UDao dao = new UDao();
-		return dao.login(dto); // 1 : 濡쒓렇�씤 �꽦怨�   |  0 : pw媛� ��由�   |  -1 : id 議댁옱�븯吏� �븡�쓬
-	}
-	
 	public UserDto getUserInfo(String id) { 
 		UDao dao = new UDao();
 		return dao.userInfo(id);

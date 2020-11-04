@@ -32,8 +32,6 @@ public class UDao {
 	
 	public int join(JoinDto dto) throws Exception, SQLException{
 
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
 		int rn = 0;
 		
 
@@ -58,51 +56,32 @@ public class UDao {
 		return rn;
 	}// join()
 	
-/*
-	public int login(LoginDto dto) {
+	public int login(LoginDto dto) throws Exception, SQLException {
 
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int rn = 0;
 
-		try {
+		conn = dbc.getConnection();
 
-			conn = DriverManager.getConnection(url, "scott", "tiger");
-			System.out.println("DB conn success!");
+		String query = "select pw from users where id = ?";
+			
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, dto.getId());
+			
+		rs = pstmt.executeQuery();
 
-			String query = "select pw from users where id = ?";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, dto.getId());
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				if (dto.getPw().equals(rs.getString("pw")))
-					rn = 1;
-				else
-					rn = 0;
-			} else
-				rn = -1;
-		} catch (Exception e1) {
-			System.out.println("errer in login() - e1 : ");
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e2) {
-				System.out.println("errer in login() - e2 : ");
-				e2.printStackTrace();
-			}
-		}
+		if (rs.next()) {
+			if (dto.getPw().equals(rs.getString("pw")))
+				rn = 1;
+			else
+				rn = 0;
+		} else
+			rn = -1;
+		
+		disconnect();
 
 		return rn;
 	} // login()
-
+/*
 	public UserDto userInfo(String uId) {
 
 		UserDto dto = null;
