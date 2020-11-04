@@ -81,52 +81,33 @@ public class UDao {
 
 		return rn;
 	} // login()
-/*
-	public UserDto userInfo(String uId) {
+
+	public UserDto userInfo(String uId) throws Exception, SQLException {
 
 		UserDto dto = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-		try {
+		conn = dbc.getConnection();
+		
+		String query = "select * from users where id = ?";
+		
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, uId);
+			
+		rs = pstmt.executeQuery();
 
-			conn = DriverManager.getConnection(url, "scott", "tiger");
-			System.out.println("DB conn success!");
+		if (rs.next()) {
+			String id = rs.getString("id");
+			String nickname = rs.getString("nickname");
+			int hLevel = rs.getInt("hLevel");
 
-			String query = "select * from users where id = ?";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, uId);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				String id = rs.getString("id");
-				String nickname = rs.getString("nickname");
-				int hLevel = rs.getInt("hLevel");
-
-				dto = new UserDto(id, nickname, hLevel);
-			}
-
-		} catch (Exception e1) {
-			System.out.println("errer in userInfo() - e1 : ");
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e2) {
-				System.out.println("errer in userInfo() - e2 : ");
-				e2.printStackTrace();
-			}
+			dto = new UserDto(id, nickname, hLevel);
 		}
+
+		disconnect();
 
 		return dto;
 	}
-
+/*
 	public int getHighestLevel(String id) {
 		int rsLevel = 1;
 		Connection conn = null;
@@ -164,7 +145,7 @@ public class UDao {
 
 		return rsLevel;
 	}
-
+	
 	public void updateHighestLevel(String id, int level) {
 
 		Connection conn = null;

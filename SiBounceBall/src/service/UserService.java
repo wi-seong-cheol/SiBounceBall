@@ -27,16 +27,26 @@ public class UserService {
 		return r; // 1 : success  |  0 : wrong pw   |  -1 : wrong id
 	}
 	
-	/*
 	public UserDto getUserInfo(String id) { 
-		UDao dao = new UDao();
-		return dao.userInfo(id);
+		UserDto dto = null;
+		try {
+			dto = UDao.getInstance().userInfo(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
+	
 	public int getHighestLevel(String id) {
-	    UDao dao = new UDao();
-	    return dao.getHighestLevel(id);
+		UserDto dto = null;
+		try {
+			dto = UDao.getInstance().userInfo(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dto.getStage();
 	}
-	   
+	/*   
 	public void updateHighestLevel(String id) { // �쁽�옱 highestLevel++
 	    UDao dao = new UDao();
 	    dao.getHighestLevel(id);

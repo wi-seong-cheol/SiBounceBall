@@ -27,6 +27,7 @@ import Scenes.*;
 import dao.UDao;
 import dto.JoinDto;
 import dto.LoginDto;
+import dto.UserDto;
 import service.UserService;
 
 public class SBBMain
@@ -88,12 +89,12 @@ public class SBBMain
 	    Scanner sc = new Scanner(System.in);
 	    System.out.print("id : ");
 	    String id = sc.nextLine();
-	    System.out.print("pw : ");
-	    String pw = sc.nextLine();
+//	    System.out.print("pw : ");
+//	    String pw = sc.nextLine();
 	    UserService us = new UserService();
-	    LoginDto dto = new LoginDto(id, pw);
-	    int rn = us.login(dto);
-	    System.out.println("rn : " + rn);
+	    UserDto dto = null;
+	    dto = us.getUserInfo(id);
+	    System.out.println(dto.getStage());
     new MakeUI1();
     //new GameOver();
     moveEngine.start();
