@@ -1,6 +1,7 @@
 package OptimizedSBB;
 
 import java.awt.Canvas;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -24,6 +25,7 @@ import java.util.Scanner;
 
 import Objects.*;
 import Scenes.*;
+import UI.MakeUI;
 import dao.UDao;
 import dto.JoinDto;
 
@@ -94,7 +96,7 @@ public class SBBMain
 //	    JoinDto dto = new JoinDto(id, nickname, pw);
 //	    int rn = dao.join(dto);
 //	    System.out.println("rn : " + rn);
-    new MakeUI1();
+    new MakeUI();
     //new GameOver();
     moveEngine.start();
     makeMainScene.start();
@@ -320,8 +322,8 @@ public class SBBMain
     	public void mousePressed(MouseEvent e) {
     		f.setFocusable(true);
     		back.setFocusable(false);
-    		MakeUI1.f.setVisible(true);
-    		MakeUI1.stage.setText("Clear Level " + SBBMain.higestLevel);
+    		MakeUI.f.setVisible(true);
+    		MakeUI.stage.setText("Clear Level " + SBBMain.higestLevel);
     		main.setVisible(false);
     		exit.setVisible(false);
     		back.setVisible(false);

@@ -1,4 +1,4 @@
-package OptimizedSBB;
+package UI;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,31 +7,27 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
+import OptimizedSBB.SBBMain;
 import dao.*;
 import dto.*;
 import service.*;
 
-class MakeUI1 extends JFrame {
+public class MakeUI extends JFrame {
 	public static JFrame f = new JFrame();
-	//private Image screenImage;
-	//private Graphics screenGraphics;
 
 	private ArrayList<ImageIcon> stageImage = new ArrayList<ImageIcon>();
 	private ArrayList<JButton> stageButton = new ArrayList<JButton>();
 	private Image startBackground = new ImageIcon(SBBMain.class.getResource("../Image/startBackground.jpeg")).getImage();
 	private Image stageBackground = new ImageIcon(SBBMain.class.getResource("../Image/stageBackground.jpeg")).getImage();
 	private Image manualImage = new ImageIcon(SBBMain.class.getResource("../Image/manual.png")).getImage();
-	private Image signUpImage = new ImageIcon(SBBMain.class.getResource("../Image/manual.png")).getImage();
-	private Image loginImage = new ImageIcon(SBBMain.class.getResource("../Image/manual.png")).getImage();
 	private JButton startButton = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/start_button1.png")));
 	private JButton manual = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/gamemanual.png")));
 	private JButton signUpButton = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/signUpButton.png")));
 	private JButton loginButton = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/loginButton.png")));
 	private JButton Rar = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/Rar.png")));
 	private JButton Lar = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/Lar.png")));
-	private JButton btn = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/back.png")));
+	private JButton back = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/back.png")));
 	private JButton initialScreen = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/back.png")));
-	
 	
 	private int stageNum=1;
 	private int loginOrSignUp = 0;
@@ -40,8 +36,9 @@ class MakeUI1 extends JFrame {
 	private String pw = new String();
     private static int i;
     public static JLabel stage = new JLabel();
-	
-	public MakeUI1(){
+    
+	public MakeUI(){
+		
 		MakeImage();
 		f.setTitle("SibounceBall");
 		f.setSize(800, 620);
@@ -49,11 +46,12 @@ class MakeUI1 extends JFrame {
 		f.setLocationRelativeTo(null);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MyPanel panel = new MyPanel();
-        Stage panel1 = new Stage();
-        Manual panel2 = new Manual();
-        SignUp panel3 = new SignUp();
-        Login panel4 = new Login();
-        JPanel panel5 = new JPanel();
+        Stage stagePanel = new Stage();
+        Manual manualPanel = new Manual();
+        JPanel inputPanel = new JPanel();
+        JPanel nicknamePanel = new JPanel();
+        JPanel idPanel = new JPanel();
+        JPanel passwordPanel = new JPanel();
         JTextField nickNameField = new JTextField(10);
         JTextField idField = new JTextField(10);
         JPasswordField pwField = new JPasswordField(10);
@@ -79,12 +77,7 @@ class MakeUI1 extends JFrame {
         		if(loginOrSignUp == 1) {
             		loginButton.setVisible(true);
             		signUpButton.setVisible(true);
-            		nickNameField.setVisible(false);
-            		nickNameText.setVisible(false);
-            		idField.setVisible(false);
-            		idText.setVisible(false);
-            		pwField.setVisible(false);
-            		pwText.setVisible(false);
+            		inputPanel.setVisible(false);
             		initialScreen.setVisible(false);
             		
             		nickName = nickNameField.getText();
@@ -97,8 +90,6 @@ class MakeUI1 extends JFrame {
             		nickNameField.setText(null);
             		idField.setText(null);
             		pwField.setText(null);
-            		
-        			confirmButton.setVisible(false);
         		}
         		else {
             		id = idField.getText();
@@ -117,20 +108,13 @@ class MakeUI1 extends JFrame {
 //            			SBBMain.higestLevel = user.getHighestLevel(id);
             			startButton.setVisible(true);
             			manual.setVisible(true);
-                		idField.setVisible(false);
-                		idText.setVisible(false);
-                		pwField.setVisible(false);
-                		pwText.setVisible(false);
+            			inputPanel.setVisible(false);
                 		initialScreen.setVisible(false);
-                		confirmButton.setVisible(false);
                 		stage.setText("Clear Level " + SBBMain.higestLevel);
             		}
         		}
         	}
         });
-        
-        confirmButton.setVisible(false);
-		f.add(confirmButton);
 		
         signUpButton.setBounds(264, 70, 126, 52);
         signUpButton.addMouseListener(new MouseAdapter(){
@@ -147,53 +131,14 @@ class MakeUI1 extends JFrame {
         		System.out.println("sign up");
         		loginButton.setVisible(false);
         		signUpButton.setVisible(false);
-        		nickNameField.setVisible(true);
-        		nickNameText.setVisible(true);
-        		idField.setVisible(true);
-        		idText.setVisible(true);
-        		pwField.setVisible(true);
-        		pwText.setVisible(true);
-        		confirmButton.setVisible(true);
+        		inputPanel.setVisible(true);
         		loginOrSignUp = 1;
         		initialScreen.setVisible(true);
         	}
         });
 		buttonSet(signUpButton);
-		f.add(signUpButton);
+		f.add(signUpButton);		
 
-		nickNameField.setBounds(350, 35, 150, 30);
-		nickNameField.setVisible(false);
-		userInput(nickNameField);
-		nickNameText.setText("Nickname");
-		nickNameText.setBounds(282, 35, 150, 30);
-		nickNameText.setVisible(false);
-		f.add(nickNameText);
-		f.add(nickNameField);
-		
-		idField.setBounds(350, 70, 150, 30);
-		idField.setVisible(false);
-		userInput(idField);
-		idText.setText("ID");
-		idText.setBounds(305, 70, 150, 30);
-		idText.setVisible(false);
-		f.add(idText);
-		f.add(idField);
-		
-		pwField.setBounds(350, 105, 150, 30);
-		pwField.setVisible(false);
-		userInput(pwField);
-		pwText.setText("Password");
-		pwText.setBounds(282, 105, 150, 30);
-		pwText.setVisible(false);
-		f.add(pwText);
-		f.add(pwField);
-		
-		stage.setBounds(680, 10, 100, 40);
-		stage.setVisible(false);
-		stage.setForeground(Color.WHITE);
-		stage.setFont(stage.getFont().deriveFont(15.0f));
-		f.add(stage);
-		
 		loginButton.setBounds(410, 70, 126, 52);
         loginButton.addMouseListener(new MouseAdapter(){
         	@Override
@@ -208,18 +153,56 @@ class MakeUI1 extends JFrame {
         	public void mousePressed(MouseEvent e) {
         		loginButton.setVisible(false);
         		signUpButton.setVisible(false);
-        		idField.setVisible(true);
-        		pwField.setVisible(true);
-        		pwField.setVisible(true);
-        		idText.setVisible(true);
-        		pwText.setVisible(true);
+        		nicknamePanel.setVisible(false);
+        		inputPanel.setVisible(true);
         		loginOrSignUp = 2;
-        		confirmButton.setVisible(true);
         		initialScreen.setVisible(true);
         	}
         });
 		buttonSet(loginButton);
 		f.add(loginButton);
+		
+		nickNameField.setBounds(350, 35, 150, 30);
+		userInput(nickNameField);
+		nickNameText.setText("Nickname");
+		nickNameText.setBounds(282, 35, 150, 30);
+		nicknamePanel.setBackground(new Color(246, 200, 167));
+		nicknamePanel.add(nickNameText);
+		nicknamePanel.add(nickNameField);
+		
+		idField.setBounds(350, 70, 150, 30);
+		userInput(idField);
+		idText.setText("ID");
+		idText.setBounds(305, 70, 150, 30);
+		idPanel.setBackground(new Color(246, 200, 167));
+		idPanel.add(idText);
+		idPanel.add(idField);
+		
+		pwField.setBounds(350, 30, 150, 30);
+		userInput(pwField);
+		pwText.setText("Password");
+		pwText.setBounds(282, 105, 150, 30);
+		passwordPanel.setBackground(new Color(246, 200, 167));
+		passwordPanel.add(pwText);
+		passwordPanel.add(pwField);
+		
+		// input Panel
+		inputPanel.setSize(220, 150);
+		inputPanel.setLocation(282,20);
+		inputPanel.add(nicknamePanel);
+		inputPanel.add(idPanel);
+		inputPanel.add(passwordPanel);
+        inputPanel.add(confirmButton);
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(-10 , -10 , 0, 0));
+		inputPanel.setVisible(false);
+		inputPanel.setBackground(new Color(246, 200, 167));
+		f.add(inputPanel);
+		
+		stage.setBounds(680, 10, 100, 40);
+		stage.setVisible(false);
+		stage.setForeground(Color.WHITE);
+		stage.setFont(stage.getFont().deriveFont(15.0f));
+		f.add(stage);
         
         startButton.setBounds(330, 80, 119, 49);
         startButton.addMouseListener(new MouseAdapter(){
@@ -236,13 +219,13 @@ class MakeUI1 extends JFrame {
         		//게임 시작 이벤트 
         		System.out.println("1");
         		startButton.setVisible(false);
-        		btn.setVisible(true);
+        		back.setVisible(true);
         		manual.setVisible(false);
         		panel.setVisible(false);
         		Rar.setVisible(true);
         		stage.setVisible(true);
-        		f.add(panel1);
-        		panel1.setVisible(true);
+        		f.add(stagePanel);
+        		stagePanel.setVisible(true);
         		stage.setText("Clear Level " + SBBMain.higestLevel);
             	stage.setVisible(true);
         		for(int i=0;i<4;i++) {
@@ -261,10 +244,11 @@ class MakeUI1 extends JFrame {
         	public void mousePressed(MouseEvent e) {
         		startButton.setVisible(false);
         		manual.setVisible(false);
-        		btn.setVisible(true);
+        		back.setVisible(true);
         		panel.setVisible(false);
-        		panel2.setVisible(true);
-        		f.add(panel2);
+        		manualPanel.setVisible(true);
+        		f.add(manualPanel);
+
         	}
         });
 		buttonSet(manual);
@@ -276,19 +260,14 @@ class MakeUI1 extends JFrame {
         	@Override
         	public void mousePressed(MouseEvent e) {
         		panel.setVisible(true);
-        		panel1.setVisible(false);
+        		stagePanel.setVisible(false);
         		for(int i=0;i<8;i++) {
         			stageButton.get(i).setVisible(false);
         		}
         		loginButton.setVisible(true);
         		signUpButton.setVisible(true);
-        		nickNameField.setVisible(false);
-        		nickNameText.setVisible(false);
-        		idField.setVisible(false);
-        		idText.setVisible(false);
-        		pwField.setVisible(false);
-        		pwText.setVisible(false);
-        		confirmButton.setVisible(false);
+        		inputPanel.setVisible(false);
+        		nicknamePanel.setVisible(true);
         		nickNameField.setText(null);
         		idField.setText(null);
         		pwField.setText(null);
@@ -300,31 +279,29 @@ class MakeUI1 extends JFrame {
 		f.add(initialScreen);
 		initialScreen.setVisible(false);
         
-		btn.setBounds(10, 10, 50, 50);
-		btn.addMouseListener(new MouseAdapter(){
+		back.setBounds(10, 10, 50, 50);
+		back.addMouseListener(new MouseAdapter(){
         	@Override
         	public void mousePressed(MouseEvent e) {
         		panel.setVisible(true);
-        		panel1.setVisible(false);
+        		stagePanel.setVisible(false);
         		for(int i=0;i<8;i++) {
         			stageButton.get(i).setVisible(false);
         		}
         		Lar.setVisible(false);
         		Rar.setVisible(false);
         		manual.setVisible(true);
-        		btn.setVisible(false);
+        		back.setVisible(false);
         		startButton.setVisible(true);
         		stage.setVisible(false);
-        		panel1.setVisible(false);
-        		panel2.setVisible(false);
-        		
-        		
+        		stagePanel.setVisible(false);
+        		manualPanel.setVisible(false);
         	}
         });
-		buttonSet(btn);
+		buttonSet(back);
 		f.setFocusable(true);
-		f.add(btn);
-		btn.setVisible(false);
+		f.add(back);
+		back.setVisible(false);
 		
 		Lar.setBounds(37, 500, 41, 45);
 		Lar.addMouseListener(new MouseAdapter(){
@@ -377,22 +354,22 @@ class MakeUI1 extends JFrame {
         	public void mousePressed(MouseEvent e) {
         		stageNum=2;
         		switch(stageNum) {
-    			case 1:
-    				break;
-    			case 2:
-    				for(int i=4;i<8;i++) {
-            			stageButton.get(i).setVisible(true);
-            		}
-    				for(int i=0;i<4;i++) {
-            			stageButton.get(i).setVisible(false);
-            		}
-    				Rar.setVisible(false);
-    				Lar.setVisible(true);
-    				break;
-    			default :
-    				System.out.println("stageNum Error : ");
-    				break;
-    		}	
+	    			case 1:
+	    				break;
+	    			case 2:
+	    				for(int i=4;i<8;i++) {
+	            			stageButton.get(i).setVisible(true);
+	            		}
+	    				for(int i=0;i<4;i++) {
+	            			stageButton.get(i).setVisible(false);
+	            		}
+	    				Rar.setVisible(false);
+	    				Lar.setVisible(true);
+	    				break;
+	    			default :
+	    				System.out.println("stageNum Error : ");
+	    				break;
+	    		}	
         	}
         });
 		buttonSet(Rar);
@@ -485,18 +462,6 @@ class MakeUI1 extends JFrame {
         public void paintComponent(Graphics g){
         	super.paintComponent(g);
             g.drawImage(manualImage, 0, 0, null);
-        }
-    }
-	class SignUp extends JPanel{
-        public void paintComponent(Graphics g){
-        	super.paintComponent(g);
-            g.drawImage(loginImage, 0, 0, null);
-        }
-    }
-	class Login extends JPanel{
-        public void paintComponent(Graphics g){
-        	super.paintComponent(g);
-            g.drawImage(signUpImage, 0, 0, null);
         }
     }
 }
