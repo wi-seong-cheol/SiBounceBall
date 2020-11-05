@@ -50,7 +50,6 @@ public class SBBMain
   public static boolean isRunning = true;
   public static int sceneNum = 1;
   public static int login = 0;
-  public static int higestLevel = 8;
   public static String id;
   public static boolean isPressed1 = false; // Left
   public static boolean isPressed2 = false; // Right
