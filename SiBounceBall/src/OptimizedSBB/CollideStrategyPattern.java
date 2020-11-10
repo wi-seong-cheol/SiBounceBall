@@ -7,18 +7,53 @@ import Scenes.MakeMainScene;
 
 public class CollideStrategyPattern {
 	public SpawnBall ball;
-	public Spawn collideObject;
+	public Spawn object;
 	public int collideObjIdx;
 	public double collidePos;
 	public ArrayList<Accel> constForces;
 	public CollideObject cObject;
 	
-	public CollideStrategyPattern(SpawnBall ball, Spawn collideObject, int collideObjIdx, double collidePos, ArrayList<Accel> constForces) {
+	public CollideStrategyPattern(SpawnBall ball, Spawn object, int collideObjIdx, ArrayList<Accel> constForces) {
 		this.ball = ball;
-		this.collideObject = collideObject;
+		this.object = object;
 		this.collideObjIdx = collideObjIdx;
-		this.collidePos = collidePos;
 		this.constForces = constForces;
+		setCollideObject();
+	}
+	public void setCollidePos(double collidePos) {
+		this.collidePos = collidePos;
+	}
+	public void setCollideObject() {
+		if(object instanceof SpawnWall) {
+			cObject = new Wall();
+		}
+		else if(object instanceof SpawnJump) {
+			cObject = new JumpBlock();
+		}
+		else if(object instanceof SpawnThorn) {
+			cObject = new Thorn();
+		}
+		else if(object instanceof SpawnElectricity) {
+			cObject = new Electricity();
+		}
+		else if(object instanceof SpawnItem1) {
+			cObject = new Item1();
+		}
+		else if(object instanceof SpawnItem2) {
+			cObject = new Item2();
+		}
+		else if(object instanceof SpawnStar) {
+			cObject = new Star();
+		}
+		else if(object instanceof SpawnBreakable) {
+			cObject = new BreakableBlock();
+		}
+		else if(object instanceof SpawnMoveL) {
+			cObject = new HorizontalMoveL();
+		}
+		else if(object instanceof SpawnMoveR) {
+			cObject = new HorizontalMoveR();
+		}
 	}
 	
 	public abstract class CollideObject{
@@ -27,23 +62,6 @@ public class CollideStrategyPattern {
 		protected LeftSideCollideStrategy leftCollide;
 		protected RightSideCollideStrategy rightCollide;
 		protected AllSideCollideStrategy allCollide;
-		/*
-		public void setTsCollideStratgy(TopSideCollideStrategy topCollideHandler) {
-			this.topCollide = topCollideHandler;
-		}
-		public void setBsCollideStratgy(BottomSideCollideStrategy bottomCollideHandler) {
-			this.bottomCollide = bottomCollideHandler;
-		}
-		public void setLsCollideStratgy(LeftSideCollideStrategy leftCollideHandler) {
-			this.leftCollide = leftCollideHandler;
-		}
-		public void setRsCollideStratgy(RightSideCollideStrategy rightCollideHandler) {
-			this.rightCollide = rightCollideHandler;
-		}
-		public void setAllCollideStratgy(AllSideCollideStrategy allCollideHandler) {
-			this.allCollide = allCollideHandler;
-		}
-		*/
 		
 		public void topCollideHandling() {
 			topCollide.topCollideHandler();
@@ -57,13 +75,13 @@ public class CollideStrategyPattern {
 		public void bottomCollideHandling() {
 			bottomCollide.bottomCollideHandler();
 		}
-		public void AllCollideHandling() {
+		public void allCollideHandling() {
 			allCollide.allCollideHandler();
 		}
 	}
 	
-	public class Block extends CollideObject{
-		public Block() {
+	public class Wall extends CollideObject{
+		public Wall() {
 			topCollide = new TsRegularJumpStrategy();
 			bottomCollide = new BsRegularJumpStrategy();
 			leftCollide = new LsRegularJumpStrategy();
@@ -180,7 +198,7 @@ public class CollideStrategyPattern {
 	}
 	
 	public void horizontalMove(int weight) {
-		ball.updatePos(collidePos, collideObject.getY());
+		ball.updatePos(collidePos, object.getY());
 		constForces.clear();
 		ball.updateVelocity(weight, 0);
 	}
