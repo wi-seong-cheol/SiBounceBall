@@ -58,9 +58,9 @@ public class MakeMainScene extends Thread
 				System.out.println("Clear");
 				
 				this.sceneNum++;
-				if(sceneNum > SBBMain.higestLevel + 1) {
-					SBBMain.higestLevel++;
-//					user.updateHighestLevel(SBBMain.id,SBBMain.higestLevel);
+				if(sceneNum > SBBMain.highestLevel + 1) {
+					SBBMain.highestLevel++;
+					user.updateHighestLevel(SBBMain.id,SBBMain.highestLevel);
 				}
 			}
 			SBBMain.sceneNum = sceneNum;

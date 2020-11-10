@@ -41,6 +41,4 @@ public class JoinDto {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	
-	
 }

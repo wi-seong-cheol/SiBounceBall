@@ -110,7 +110,7 @@ public class MakeUI extends JFrame {
             			manual.setVisible(true);
             			inputPanel.setVisible(false);
                 		initialScreen.setVisible(false);
-                		stage.setText("Clear Level " + SBBMain.higestLevel);
+                		stage.setText("Clear Level " + SBBMain.highestLevel);
             		}
         		}
         	}
@@ -226,7 +226,7 @@ public class MakeUI extends JFrame {
         		stage.setVisible(true);
         		f.add(stagePanel);
         		stagePanel.setVisible(true);
-        		stage.setText("Clear Level " + SBBMain.higestLevel);
+        		stage.setText("Clear Level " + SBBMain.highestLevel);
             	stage.setVisible(true);
         		for(int i=0;i<4;i++) {
         			stageButton.get(i).setVisible(true);
@@ -419,7 +419,7 @@ public class MakeUI extends JFrame {
 		stageButton.get(N).addMouseListener(new MouseAdapter(){
         	@Override
         	public void mousePressed(MouseEvent e) {
-        		if(SBBMain.higestLevel + 1 > N) {
+        		if(SBBMain.highestLevel + 1 > N) {
         			SBBMain.sceneNum = N+1;
         			SBBMain.f.setVisible(true);
         			f.setVisible(false);

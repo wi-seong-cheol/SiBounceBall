@@ -21,11 +21,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-
+import java.util.Scanner;
 
 import Objects.*;
 import Scenes.*;
-
+import UI.MakeUI;
+import dao.UDao;
+import dto.JoinDto;
 
 public class SBBMain
 {
@@ -51,6 +53,7 @@ public class SBBMain
   public static boolean isRunning = true;
   public static int sceneNum = 1;
   public static int login = 0;
+  public static int highestLevel = 8;
   public static String id;
   public static boolean isPressed1 = false; // Left
   public static boolean isPressed2 = false; // Right
@@ -81,10 +84,19 @@ public class SBBMain
   public static void main(String[] args)
   {
     // Initialize some things.
-
-
-    //new MakeUI1();
-
+    initializeJFrame();
+//	    Scanner sc = new Scanner(System.in);
+//	    System.out.print("id : ");
+//	    String id = sc.nextLine();
+//	    System.out.print("nickname : ");
+//	    String nickname = sc.nextLine();
+//	    System.out.print("pw : ");
+//	    String pw = sc.nextLine();
+//	    UDao dao = new UDao();
+//	    JoinDto dto = new JoinDto(id, nickname, pw);
+//	    int rn = dao.join(dto);
+//	    System.out.println("rn : " + rn);
+    new MakeUI();
     //new GameOver();
     moveEngine.start();
     makeMainScene.start();
@@ -173,8 +185,8 @@ public class SBBMain
            * Wall
            * Jump
            * Thorn
-           * Item1 : 占쏙옙占쎈룴
-           * Item2 : 占쎌젎占쎈늄
+           * Item1 : 대쉬
+           * Item2 : 점프
            * Star
            * Breakable
            * MoveL
@@ -237,12 +249,12 @@ public class SBBMain
   }
   
 
-  //awt占쎈솭占쎄텕筌욑옙     : native OS占쎌벥 GUI 占쎈즲占쏙옙獄쏆룇釉� 占쎌삂占쎈짗(餓λ쵎�쎗 �뚮똾猷뤄옙瑗놂옙�뱜) -> OS占쎈퓠占쎈뎡占쎌뵬 GUI占쎈뼄�뵳占�
-  //swing占쎈솭占쎄텕筌욑옙 : JAVA占쎈섧占쎈선嚥∽옙 占쎌뵠�뙴�뫁堉깍쭪占� (野껋럥�쎗 �뚮똾猷뤄옙瑗놂옙�뱜) -> GUI揶쏉옙 占쎈선占쎈샥 OS占쎈퓠占쎄퐣占쎈즲 占쎈짗占쎌뵬. 占쎌깈占쎌넎占쎄쉐�넫�뿭�벉 J嚥∽옙 占쎈뻻占쎌삂
-  //paint => 占쎌삏占쎈쐭筌랃옙 占쎈맙占쎈땾
-  //update => AWT 占쎈퓦筌욊쑴�뵠 占쎌맊占쎈즲占쎌뒭 占쎈쑓沃섎챷占� 占쎌뿯占쎈�占쎌뱽 占쎈르, 占쎄텢占쎌뒠占쎈릭占쎈뮉 paint�몴占� 占쎌깈�빊�뮉釉�占쎈뮉 筌롫뗄苑뚳옙諭�
-  //repaint => 占쎌뇚�겫占쏙옙肉됵옙苑� AWT 占쎈퓦筌욊쑵釉놂옙�� update(g) �넫占� 占쎄텢占쎌뒠占쎈릭占쎌뵬�⑨옙 占쎌뒄筌ｏ옙占쎈릭占쎈뮉 筌롫뗄苑뚳옙諭�
-  //占쎈솭占쎄섯占쎌뱽 �빊遺쏙옙占쎈뻥占쎈뼄占쎈쐲揶쏉옙, 甕곌쑵�뱣占쎌뱽 �빊遺쏙옙占쎈뻥占쎈뼄占쎈쐲揶쏉옙 占쎈릭筌롳옙 repaint�몴占� 占쎈꽰占쎈퉸 占쎈뼄占쎈뻻 域밸챶�젻餓μ꼷苑� frame占쎈퓠 占쎈ご占쎈뻻占쎈막 占쎈땾 占쎌뿳占쎌벉.
+  //awt패키지     : native OS의 GUI 도움받아 작동(중량 컴포넌트) -> OS에따라 GUI다름
+  //swing패키지 : JAVA언어로 이루어짐 (경량 컴포넌트) -> GUI가 어떤 OS에서도 동일. 호환성좋음 J로 시작
+  //paint => 랜더링 함수
+  //update => AWT 엔진이 윈도우 데미지 입었을 때, 사용하는 paint를 호출하는 메서드
+  //repaint => 외부에서 AWT 엔진한테 update(g) 좀 사용하라고 요청하는 메서드
+  //패널을 추가했다던가, 버튼을 추가했다던가 하면 repaint를 통해 다시 그려줘서 frame에 표시할 수 있음.
   
   private static void setImages()
   {
@@ -273,16 +285,16 @@ public class SBBMain
   private static void initializeJFrame()
   {
     // Create the frame...
-    f = new JFrame(TITLE); // 占쎈늄占쎌쟿占쎌뿫
+    f = new JFrame(TITLE); // 프레임
     
     keyListener = new MyKeyListener();
     
     f.addKeyListener(keyListener);
-    f.setIgnoreRepaint(false); // 占쎈쐭�뇡遺얠쒔占쎈쓠 �꽴占쏙옙�졃, repaint()�몴占� 筌띾맧�뮉 筌롫뗄�꺖占쎈굡
-    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 占쎌넅筌롫똻伊뚨뙴�슣�뻻 占쎈선占쎈탣�뵳�딉옙占쎌뵠占쎈�� �넫�굝利븝옙�뻻占쎄땀. (Console占쎈퓠占쎄퐣 占쎌삂占쎈짗�넫�굝利�.)
+    f.setIgnoreRepaint(false); // 더블버퍼 관련, repaint()를 막는 메소드
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 화면종료시 어플리케이션 종료시킴. (Console에서 작동종료.)
     // Create canvas for painting...
-    c = new Canvas(); // 占쎌넅筌롳옙
-    // 筌�遺얠쒔占쎈뮞�몴占� 占쎄퉱嚥∽옙 筌띾슢諭띰옙�뮉椰꾬옙.
+    c = new Canvas(); // 화면
+    // 캔버스를 새로 만드는거.
     c.setIgnoreRepaint(true);
     c.setSize(X, Y);
     
@@ -310,8 +322,8 @@ public class SBBMain
     	public void mousePressed(MouseEvent e) {
     		f.setFocusable(true);
     		back.setFocusable(false);
-    		//MakeUI.f.setVisible(true);
-    		//MakeUI.stage.setText("Clear Level " + SBBMain.highestLevel);
+    		MakeUI.f.setVisible(true);
+    		MakeUI.stage.setText("Clear Level " + SBBMain.highestLevel);
     		main.setVisible(false);
     		exit.setVisible(false);
     		back.setVisible(false);
@@ -357,14 +369,14 @@ public class SBBMain
 	f.setFocusable(true);
 	// Add the canvas, and display.
 	f.add(c);
-	f.pack(); // 筌≪�寃뺞묾占� Canvas占쎈퓠 筌띿쉳苡� 占쎈퉸餓ο옙
-	f.setLocationRelativeTo(null); // 占쎈뼄占쎈뻬占쎈뻻 window frame占쎌뱽 screen 餓λ쵐釉곤옙�몵嚥∽옙
+	f.pack(); // 창크기 Canvas에 맞게 해줌
+	f.setLocationRelativeTo(null); // 실행시 window frame을 screen 중앙으로
 	f.setVisible(false);
 
 	// Set up the BufferStrategy for double buffering.
 	c.createBufferStrategy(2);
 	b = c.getBufferStrategy();
-	// Get graphics configuration...(域밸챶�삋占쎈동 占쎌넎野껓옙)
+	// Get graphics configuration...(그래픽 환경)
 	ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	gd = ge.getDefaultScreenDevice();
 	gc = gd.getDefaultConfiguration();
