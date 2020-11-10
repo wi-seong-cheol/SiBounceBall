@@ -63,6 +63,12 @@ public class CollideStrategyPattern {
 		protected RightSideCollideStrategy rightCollide;
 		protected AllSideCollideStrategy allCollide;
 		
+		public void RegularJumpApply() {
+			bottomCollide = new BsRegularJumpStrategy();
+			leftCollide = new LsRegularJumpStrategy();
+			rightCollide = new RsRegularJumpStrategy();
+		}
+		
 		public void topCollideHandling() {
 			topCollide.topCollideHandler();
 		}
@@ -83,49 +89,37 @@ public class CollideStrategyPattern {
 	public class Wall extends CollideObject{
 		public Wall() {
 			topCollide = new TsRegularJumpStrategy();
-			bottomCollide = new BsRegularJumpStrategy();
-			leftCollide = new LsRegularJumpStrategy();
-			rightCollide = new RsRegularJumpStrategy();
+			RegularJumpApply();
 		}
 	}
 	public class BreakableBlock extends CollideObject{
 		public BreakableBlock() {
 			topCollide = new TsBreakableJumpStrategy();
-			bottomCollide = new BsRegularJumpStrategy();
-			leftCollide = new LsRegularJumpStrategy();
-			rightCollide = new RsRegularJumpStrategy();
+			RegularJumpApply();
 		}
 	}
 	public class JumpBlock extends CollideObject{
 		public JumpBlock() {
 			topCollide = new TsBlockJumpStrategy();
-			bottomCollide = new BsRegularJumpStrategy();
-			leftCollide = new LsRegularJumpStrategy();
-			rightCollide = new RsRegularJumpStrategy();
+			RegularJumpApply();
 		}
 	}
 	public class HorizontalMoveL extends CollideObject{
 		public HorizontalMoveL() {
 			topCollide = new TsLeftMoveStrategy();
-			bottomCollide = new BsRegularJumpStrategy();
-			leftCollide = new LsRegularJumpStrategy();
-			rightCollide = new RsRegularJumpStrategy();
+			RegularJumpApply();
 		}
 	}
 	public class HorizontalMoveR extends CollideObject{
 		public HorizontalMoveR() {
 			topCollide = new TsRightMoveStrategy();
-			bottomCollide = new BsRegularJumpStrategy();
-			leftCollide = new LsRegularJumpStrategy();
-			rightCollide = new RsRegularJumpStrategy();
+			RegularJumpApply();
 		}
 	}
 	public class Thorn extends CollideObject{
 		public Thorn() {
 			topCollide = new TsResetStrategy();
-			bottomCollide = new BsRegularJumpStrategy();
-			leftCollide = new LsRegularJumpStrategy();
-			rightCollide = new RsRegularJumpStrategy();
+			RegularJumpApply();
 		}
 	}
 	public class Electricity extends CollideObject{
@@ -284,6 +278,5 @@ public class CollideStrategyPattern {
 			resetGame();
 		}
 	}
-	
-	
+
 }
