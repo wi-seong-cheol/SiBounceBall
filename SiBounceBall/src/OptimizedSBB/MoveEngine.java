@@ -139,42 +139,39 @@ public class MoveEngine extends Thread
 			else if(obj.getType()==1) {
 				isCollision = checkRect(ball, obj);
 			}
-			
 			if(isCollision) {
-				if(obj instanceof SpawnWall) {
-					collideWall(ball, (SpawnWall) obj);
+				double topSideChk = obj.getY() - obj.getLength() - ball.getLength();
+				double downSideChk = obj.getY() + obj.getLength() + ball.getLength();
+				double leftSideChk = obj.getX() - obj.getLength() - ball.getLength();
+				double rightSideChk = obj.getX() + obj.getLength() + ball.getLength();
+				CollideStrategyPattern collideObj = new CollideStrategyPattern(ball, obj, i, constForces);
+				
+				if(obj instanceof SpawnElectricity | obj instanceof SpawnItem1 | obj instanceof SpawnItem2|
+					obj instanceof SpawnStar){
+					collideObj.cObject.allCollideHandling();
 				}
-				else if(obj instanceof SpawnJump) {
-					collideJump(ball, (SpawnJump) obj);
+				else if((ball.getY() > topSideChk) && (ball.getY() < obj.getY())
+						&& (ball.getX()-1.5 > leftSideChk) && (ball.getX()+1.5 < rightSideChk) ) {
+					collideObj.setCollidePos(topSideChk);
+					collideObj.cObject.topCollideHandling();
 				}
-				else if(obj instanceof SpawnThorn) {
-					collideThorn(ball, (SpawnThorn) obj);
+				else if((ball.getY() < downSideChk) && (ball.getY() > obj.getY()) 
+						&& (ball.getX()-1.5 > leftSideChk) && (ball.getX()+1.5 < rightSideChk)) {
+					collideObj.setCollidePos(downSideChk);
+					collideObj.cObject.bottomCollideHandling();
 				}
-				else if(obj instanceof SpawnElectricity) {
-					collideElectricity(ball, (SpawnElectricity) obj);
+				else if((ball.getX() > leftSideChk) && (ball.getX() < obj.getX())) {
+					collideObj.setCollidePos(leftSideChk);
+					collideObj.cObject.leftCollideHandling();
 				}
-				else if(obj instanceof SpawnItem1) {
-					collideItem1(ball, (SpawnItem1) obj, i);
-				}
-				else if(obj instanceof SpawnItem2) {
-					collideItem2(ball, (SpawnItem2) obj, i);
-				}
-				else if(obj instanceof SpawnStar) {
-					collideStar(ball, (SpawnStar) obj, i);
-				}
-				else if(obj instanceof SpawnBreakable) {
-					collideBreakable(ball, (SpawnBreakable) obj, i);
-				}
-				else if(obj instanceof SpawnMoveL) {
-					collideMoveL(ball, (SpawnMoveL) obj);
-				}
-				else if(obj instanceof SpawnMoveR) {
-					collideMoveR(ball, (SpawnMoveR) obj);
+				else if((ball.getX() < rightSideChk) && (ball.getX() > obj.getX())) {
+					collideObj.setCollidePos(rightSideChk);
+					collideObj.cObject.rightCollideHandling();
 				}
 			}
 		}
 	}
-
+	/*
 	private synchronized void collideWall(SpawnBall ball, SpawnWall wall)
 	{
 		double topSideChk = wall.getY() - wall.getLength()/2 - ball.getLength();
@@ -388,7 +385,7 @@ public class MoveEngine extends Thread
 			ball.updateVelocity((ball.vx() +80), ball.vy());
 		}
 	}
-
+	*/
 	private synchronized void checkFrameCollisions(SpawnBall ball)
 	{
 		if (ball.getY() > SBBMain.Y + 1150) {
