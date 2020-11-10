@@ -150,7 +150,7 @@ public class CollideStrategyPattern {
 	}
 	
 	//전략의 메소드 화
-	public void resetGame() {
+	public synchronized void resetGame() {
 		ball.updatePos(-150, 500);
 		try {
 			Thread.sleep(750);
@@ -160,7 +160,7 @@ public class CollideStrategyPattern {
 		SBBMain.sceneNum = -1;
 	}
 	
-	public void deleteObject() {
+	public synchronized void deleteObject() {
 		SBBMain.living.remove(collideObjIdx);
 	}
 	
@@ -171,45 +171,44 @@ public class CollideStrategyPattern {
 	}
 	
 	public class TsResetStrategy implements TopSideCollideStrategy{
-		public void topCollideHandler() {
+		public synchronized void topCollideHandler() {
 			resetGame();
 		}
 	}
 	
-	public void TsJump(int weight) {
+	public synchronized void TsJump(int weight) {
 		ball.updatePos(ball.getX(), collidePos);
 		ball.updateVelocity(ball.vx(), weight);
 	}
 	public class TsRegularJumpStrategy implements TopSideCollideStrategy{
-		public void topCollideHandler() {
-			TsJump(-500);
+		public synchronized void topCollideHandler() {
+			TsJump(-475);
 		}
 	}
 	public class TsBreakableJumpStrategy implements TopSideCollideStrategy{
-		public void topCollideHandler() {
-			TsJump(-500);
+		public synchronized void topCollideHandler() {
+			TsJump(-475);
 			deleteObject();
 		}
 	}
 	public class TsBlockJumpStrategy implements TopSideCollideStrategy{
-		public void topCollideHandler() {
-			TsJump(-720);
+		public synchronized void topCollideHandler() {
+			TsJump(-690);
 		}
 	}
 	
-	public void horizontalMove(int weight) {
-		ball.updatePos(collidePos, object.getY());
-		constForces.clear();
-		ball.updateVelocity(weight, 0);
-	}
 	public class TsLeftMoveStrategy implements TopSideCollideStrategy{
-		public void topCollideHandler() {
-			horizontalMove(-600);
+		public synchronized void topCollideHandler() {
+			ball.updatePos(object.getX() - object.getLength()/2 - ball.getLength(), object.getY());
+			constForces.clear();
+			ball.updateVelocity(-600, 0);
 		}
 	}
 	public class TsRightMoveStrategy implements TopSideCollideStrategy{
-		public void topCollideHandler() {
-			horizontalMove(600);
+		public synchronized void topCollideHandler() {
+			ball.updatePos(object.getX() + object.getLength()/2 + ball.getLength(), object.getY());
+			constForces.clear();
+			ball.updateVelocity(600, 0);
 		}
 	}
 	//좌측 충돌 전략
@@ -219,7 +218,7 @@ public class CollideStrategyPattern {
 	}
 	
 	public class LsRegularJumpStrategy implements LeftSideCollideStrategy {
-		public void leftCollideHandler() {
+		public synchronized void leftCollideHandler() {
 			ball.updatePos(collidePos, ball.getY());
 			ball.updateVelocity((ball.vx() -80), ball.vy());
 		}
@@ -231,7 +230,7 @@ public class CollideStrategyPattern {
 	}
 	
 	public class RsRegularJumpStrategy implements RightSideCollideStrategy {
-		public void rightCollideHandler() {
+		public synchronized void rightCollideHandler() {
 			ball.updatePos(collidePos, ball.getY());
 			ball.updateVelocity((ball.vx() +80), ball.vy());
 		}
@@ -243,7 +242,7 @@ public class CollideStrategyPattern {
 	}
 	
 	public class BsRegularJumpStrategy implements BottomSideCollideStrategy {
-		public void bottomCollideHandler() {
+		public synchronized void bottomCollideHandler() {
 			ball.updatePos(ball.getX(), collidePos);
 			ball.updateVelocity(ball.vx(), (ball.vy() * -SBBMain.BOUNCE));
 			if(ball.vy()>100) ball.updateVelocity(ball.vx(), 150);
@@ -257,19 +256,19 @@ public class CollideStrategyPattern {
 	}
 
 	public class GetItem1Strategy implements AllSideCollideStrategy{
-		public void allCollideHandler() {
+		public synchronized void allCollideHandler() {
 			deleteObject();
 			SBBMain.inventory1 = true;
 		}
 	}
 	public class GetItem2Strategy implements AllSideCollideStrategy{
-		public void allCollideHandler() {
+		public synchronized void allCollideHandler() {
 			deleteObject();
-			SBBMain.inventory1 = true;
+			SBBMain.inventory2 = true;
 		}
 	}
 	public class GetStarStrategy implements AllSideCollideStrategy{
-		public void allCollideHandler() {
+		public synchronized void allCollideHandler() {
 			deleteObject();
 			if(MakeMainScene.star==1) {
 				try {
@@ -281,7 +280,7 @@ public class CollideStrategyPattern {
 		}
 	}
 	public class ElectricityCollideStrategy implements AllSideCollideStrategy{
-		public void allCollideHandler() {
+		public synchronized void allCollideHandler() {
 			resetGame();
 		}
 	}
