@@ -3,8 +3,7 @@ package Scenes;
 import OptimizedSBB.*;
 import service.*;
 
-public class MakeMainScene extends Thread
-{
+public class MakeMainScene extends Thread {
 	// 새로운 Scene 추가시 lastLevel 업데이트 필수...!!!
 	// 새로운 Scene 추가시 makeBall은 항상 맨처음에...!!!
 	public static int star=1;
@@ -20,16 +19,12 @@ public class MakeMainScene extends Thread
 	MakeScene9 s9 = new MakeScene9();
 	int sceneNum = SBBMain.sceneNum;
 	UserService user = new UserService();
-	public void run()
-	{
+	public void run() {
 		setScene(sceneNum);
 		while (SBBMain.isRunning) {
 			if(star == 0) setScene(-2);
 			if(sceneNum != SBBMain.sceneNum) {
 				setScene(SBBMain.sceneNum);
-			}
-			else {
-				
 			}
 			try {
 				sleep(1);
@@ -38,8 +33,7 @@ public class MakeMainScene extends Thread
 		}
 	}
 	
-	public synchronized void setScene(int n)
-	{
+	public synchronized void setScene(int n) {
 		SBBMain.living.clear();
 		SBBMain.inventory1 = false;
 		SBBMain.inventory2 = false;
