@@ -49,7 +49,7 @@ public class SBBMain
   private static Graphics2D g2d;
   private static AffineTransform at = new AffineTransform();
   public static MyKeyListener keyListener;
-  //public static ArrayList<Spawn> living = new ArrayList<Spawn>();
+  public static ArrayList<Spawn> living = new ArrayList<Spawn>();
   public static boolean isRunning = true;
   public static int sceneNum = 1;
   public static int login = 0;
@@ -96,7 +96,8 @@ public class SBBMain
 //	    JoinDto dto = new JoinDto(id, nickname, pw);
 //	    int rn = dao.join(dto);
 //	    System.out.println("rn : " + rn);
-    new MakeUI();
+    MakeUI makeUI = new MakeUI();
+    makeUI.MakeScene();
     //new GameOver();
     moveEngine.start();
     makeMainScene.start();
@@ -135,10 +136,10 @@ public class SBBMain
         else g2d.drawImage(background.get(0), 0,0, null);
         
         // Draw entities////////////////////////////////////////////////////////////////////////////////////////
-        for (int i = 0; i < MakeGameComponents.living.size(); i++) {
+        for (int i = 0; i < living.size(); i++) {
           try {
-        	  at.translate(MakeGameComponents.living.get(i).getX(), MakeGameComponents.living.get(i).getY());
-        	  Spawn s = MakeGameComponents.living.get(i);
+        	  at.translate(living.get(i).getX(), living.get(i).getY());
+        	  Spawn s = living.get(i);
               if(s instanceof SpawnBall) { 
             	  //g2d.drawImage(sibaball,(int) (s.getX() ),(int) (s.getY() ), c);
             	  g2d.drawImage(sibaball2,(int) (s.getX() )+4,(int) (s.getY() ), c);
@@ -214,7 +215,39 @@ public class SBBMain
     }
   }
 
-  
+  public static synchronized void makeBall(int x, int y) {
+    living.add(new SpawnBall(x, y));
+  }
+  public static synchronized void makeWall(int x, int y, int n) {
+	living.add(new SpawnWall(x, y, n));  
+  }
+  public static synchronized void makeJump(int x, int y) {
+	living.add(new SpawnJump(x, y));  
+  }
+  public static synchronized void makeThorn(int x, int y, int n) {
+	living.add(new SpawnThorn(x, y, n));
+  }
+  public static synchronized void makeElectricity(int x, int y) {
+	living.add(new SpawnElectricity(x, y));
+  }
+  public static synchronized void makeItem1(int x, int y) {
+	living.add(new SpawnItem1(x, y));
+  }
+  public static synchronized void makeItem2(int x, int y) {
+	living.add(new SpawnItem2(x, y));
+  }
+  public static synchronized void makeStar(int x, int y) {
+	living.add(new SpawnStar(x, y));
+  }
+  public static synchronized void makeBreakable(int x, int y) {
+	living.add(new SpawnBreakable(x, y));
+  }
+  public static synchronized void makeMoveL(int x, int y) {
+	living.add(new SpawnMoveL(x, y));
+  }
+  public static synchronized void makeMoveR(int x, int y) {
+	living.add(new SpawnMoveR(x, y));
+  }
   
 
   //awt패키지     : native OS의 GUI 도움받아 작동(중량 컴포넌트) -> OS에따라 GUI다름
