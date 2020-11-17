@@ -1,6 +1,6 @@
 package service;
 
-import dao.UDao;
+import dao.Dao;
 import dto.JoinDto;
 import dto.LoginDto;
 import dto.UserDto;
@@ -10,7 +10,7 @@ public class UserService {
 	public int join(JoinDto dto) {
 		int r = 0;
 		try {
-			r = UDao.getInstance().join(dto);
+			r = Dao.getInstance().join(dto);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -20,7 +20,7 @@ public class UserService {
 	public int login(LoginDto dto) {
 		int r = 0;
 		try {
-			r = UDao.getInstance().login(dto);
+			r = Dao.getInstance().login(dto);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -30,7 +30,7 @@ public class UserService {
 	public UserDto getUserInfo(String id) { 
 		UserDto dto = null;
 		try {
-			dto = UDao.getInstance().userInfo(id);
+			dto = Dao.getInstance().userInfo(id);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -40,7 +40,7 @@ public class UserService {
 	public int getHighestLevel(String id) {
 		UserDto dto = null;
 		try {
-			dto = UDao.getInstance().userInfo(id);
+			dto = Dao.getInstance().userInfo(id);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -49,7 +49,7 @@ public class UserService {
 	
 	public void updateHighestLevel(String id) { // highestLevel++
 	    try {
-	    	UDao.getInstance().updateHighestLevel(id);
+	    	Dao.getInstance().updateHighestLevel(id);
 	    } catch(Exception e) {
 	    	e.printStackTrace();
 	    }
@@ -57,7 +57,7 @@ public class UserService {
 	
 	public void updateHighestLevel(String id, int level) { // update highestLevel to 'level'
 		try {
-	    	UDao.getInstance().updateHighestLevel(id, level);
+	    	Dao.getInstance().updateHighestLevel(id, level);
 	    } catch(Exception e) {
 	    	e.printStackTrace();
 	    }

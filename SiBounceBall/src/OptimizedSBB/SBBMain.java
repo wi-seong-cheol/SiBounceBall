@@ -26,7 +26,6 @@ import java.util.Scanner;
 import Objects.*;
 import Scenes.*;
 import UI.MakeUI;
-import dao.UDao;
 import dto.JoinDto;
 
 public class SBBMain
