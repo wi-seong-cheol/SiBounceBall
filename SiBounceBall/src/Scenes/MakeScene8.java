@@ -1,51 +1,47 @@
 package Scenes;
 
-import OptimizedSBB.SBBMain;
-
-public class MakeScene8
-{
+public class MakeScene8 extends MakeGameComponents{
 	int i;
-	public void makeScene()
-	{
+	public void makeScene() {
 		MakeMainScene.star = 15;
-		SBBMain.makeBall(80, 20);
-		SBBMain.makeWall(80, 90, 2);
-		SBBMain.makeStar(350, 60);
-		SBBMain.makeWall(350, 90, 2);
-		SBBMain.makeStar(590, 60);
-		SBBMain.makeWall(590, 90, 2);
+		makeBall(80, 20);
+		makeWall(80, 90, 2);
+		makeStar(350, 60);
+		makeWall(350, 90, 2);
+		makeStar(590, 60);
+		makeWall(590, 90, 2);
 		
-		for(i=0;i <3; i++) SBBMain.makeElectricity(80,240+i*150);
-		for(i=0; i<3; i++) SBBMain.makeStar(80, 210+ i*150);
-		SBBMain.makeWall(50, 240, 2);
-		SBBMain.makeWall(110, 390, 2);
-		SBBMain.makeWall(50, 540, 2);
+		for(i=0;i <3; i++) makeElectricity(80,240+i*150);
+		for(i=0; i<3; i++) makeStar(80, 210+ i*150);
+		makeWall(50, 240, 2);
+		makeWall(110, 390, 2);
+		makeWall(50, 540, 2);
 		
-		SBBMain.makeJump(260, 240);
-		SBBMain.makeJump(200, 390);
-		SBBMain.makeJump(140, 540);
+		makeJump(260, 240);
+		makeJump(200, 390);
+		makeJump(140, 540);
 		
-		for(i=0;i <3; i++) SBBMain.makeElectricity(350,240+i*150);
-		for(i=0; i<3; i++) SBBMain.makeStar(350, 210+ i*150);
-		SBBMain.makeBreakable(320, 270);
-		SBBMain.makeBreakable(380, 420);
-		SBBMain.makeBreakable(320, 570);
+		for(i=0;i <3; i++) makeElectricity(350,240+i*150);
+		for(i=0; i<3; i++) makeStar(350, 210+ i*150);
+		makeBreakable(320, 270);
+		makeBreakable(380, 420);
+		makeBreakable(320, 570);
 		
-		SBBMain.makeJump(410, 570);
-		SBBMain.makeJump(470, 420);
-		SBBMain.makeJump(500, 270);
+		makeJump(410, 570);
+		makeJump(470, 420);
+		makeJump(500, 270);
 		
-		SBBMain.makeItem2(500, 240);
-		for(i=0;i <3; i++) SBBMain.makeElectricity(590,240+i*150);
-		for(i=0; i<3; i++) SBBMain.makeStar(590, 210+ i*150);
-		//SBBMain.makeStar(590, 180);
-		SBBMain.makeItem2(620, 120);
-		SBBMain.makeItem2(560, 390);
-		SBBMain.makeItem2(620, 540);
+		makeItem2(500, 240);
+		for(i=0;i <3; i++) makeElectricity(590,240+i*150);
+		for(i=0; i<3; i++) makeStar(590, 210+ i*150);
+		//makeStar(590, 180);
+		makeItem2(620, 120);
+		makeItem2(560, 390);
+		makeItem2(620, 540);
 		
-		SBBMain.makeStar(560, 240);
-		SBBMain.makeStar(620, 240);
-		SBBMain.makeStar(620, 390);
-		SBBMain.makeStar(560, 540);
+		makeStar(560, 240);
+		makeStar(620, 240);
+		makeStar(620, 390);
+		makeStar(560, 540);
 	}
 }
