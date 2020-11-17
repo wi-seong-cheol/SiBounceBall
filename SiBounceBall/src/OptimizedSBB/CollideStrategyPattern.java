@@ -3,6 +3,7 @@ package OptimizedSBB;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import Objects.*;
+import Scenes.MakeGameComponents;
 import Scenes.MakeMainScene;
 
 public class CollideStrategyPattern {
@@ -155,7 +156,7 @@ public class CollideStrategyPattern {
 	}
 	
 	public synchronized void deleteObject() {
-		SBBMain.living.remove(collideObjIdx);
+		MakeGameComponents.living.remove(collideObjIdx);
 	}
 	
 	//상단 충돌 전략

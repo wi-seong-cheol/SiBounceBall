@@ -34,7 +34,7 @@ public class MakeMainScene extends Thread {
 	}
 	
 	public synchronized void setScene(int n) {
-		SBBMain.living.clear();
+		MakeGameComponents.living.clear();
 		SBBMain.inventory1 = false;
 		SBBMain.inventory2 = false;
 			

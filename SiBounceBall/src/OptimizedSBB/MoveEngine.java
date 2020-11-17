@@ -2,6 +2,7 @@ package OptimizedSBB;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import Objects.*;
+import Scenes.MakeGameComponents;
 import Scenes.MakeMainScene;
 
 public class MoveEngine extends Thread
@@ -46,7 +47,7 @@ public class MoveEngine extends Thread
 	private synchronized void applyConstForces()
 	
 	{
-		if(SBBMain.living.size()== 0) return; // Ball인스턴스를 인덱스로 접근하기 위함.
+		if(MakeGameComponents.living.size()== 0) return; // Ball인스턴스를 인덱스로 접근하기 위함.
 		double xAccel = 0, yAccel = 0;
 		try {
 			for (int i = 0; i < constForces.size(); i++) {
@@ -54,7 +55,7 @@ public class MoveEngine extends Thread
 				yAccel += constForces.get(i).ay();
 			}
 			// Apply the sum acceleration to each entity.
-			SpawnBall ball = (SpawnBall) SBBMain.living.get(ballIndex);
+			SpawnBall ball = (SpawnBall) MakeGameComponents.living.get(ballIndex);
 			ball.addAccel(new Accel(xAccel, yAccel));
 		} catch (Exception e) {
 			return;
@@ -63,9 +64,9 @@ public class MoveEngine extends Thread
 
 	private synchronized void sumForces()
 	{
-		if(SBBMain.living.size()== 0) return;
+		if(MakeGameComponents.living.size()== 0) return;
 		try {
-			SpawnBall ball = (SpawnBall) SBBMain.living.get(ballIndex);
+			SpawnBall ball = (SpawnBall) MakeGameComponents.living.get(ballIndex);
 			// Get the sum of all accelerations acting on object.
 			Accel theAccel = ball.sumAccel();
 			// Apply the resulting change in velocity.
@@ -79,9 +80,9 @@ public class MoveEngine extends Thread
 
 	private synchronized void moveEnts()
 	{
-		if(SBBMain.living.size()== 0) return;
+		if(MakeGameComponents.living.size()== 0) return;
 		try {
-			SpawnBall ball = (SpawnBall) SBBMain.living.get(ballIndex);
+			SpawnBall ball = (SpawnBall) MakeGameComponents.living.get(ballIndex);
 			double oldX = ball.getX(), oldY = ball.getY();
 			double newX = oldX + (ball.vx() * timeFraction);
 			double newY = oldY + (ball.vy() * timeFraction);
@@ -130,9 +131,9 @@ public class MoveEngine extends Thread
 	private synchronized void checkCollisions(SpawnBall ball)
 	{
 		boolean isCollision = false;
-		for (int i = 0; i < SBBMain.living.size(); i++) {
+		for (int i = 0; i < MakeGameComponents.living.size(); i++) {
 			if(i == ballIndex) continue;
-			Spawn obj = SBBMain.living.get(i); if (obj == null) break;
+			Spawn obj = MakeGameComponents.living.get(i); if (obj == null) break;
 			if(obj.getType()==0) {
 				isCollision = checkCircle(ball, obj);
 			}
