@@ -11,20 +11,20 @@ import dto.JoinDto;
 import dto.LoginDto;
 import dto.UserDto;
 
-public class UDao {
+public class Dao {
 
-	private static UDao dao;
+	private static Dao dao;
 	private DBConnector dbc = DBConnector.getInstance();
 	
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private UDao() {}
+	private Dao() {}
 	
-	public static UDao getInstance() {
+	public static Dao getInstance() {
 		if(dao == null) {
-			dao = new UDao();
+			dao = new Dao();
 		}
 		return dao;
 	}
