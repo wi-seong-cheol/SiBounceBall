@@ -84,7 +84,19 @@ public class SBBMain
   {
     // Initialize some things.
     initializeJFrame();
-    new MakeUI();
+//	    Scanner sc = new Scanner(System.in);
+//	    System.out.print("id : ");
+//	    String id = sc.nextLine();
+//	    System.out.print("nickname : ");
+//	    String nickname = sc.nextLine();
+//	    System.out.print("pw : ");
+//	    String pw = sc.nextLine();
+//	    UDao dao = new UDao();
+//	    JoinDto dto = new JoinDto(id, nickname, pw);
+//	    int rn = dao.join(dto);
+//	    System.out.println("rn : " + rn);
+    MakeUI makeUI = new MakeUI();
+    makeUI.MakeScene();
     //new GameOver();
     moveEngine.start();
     makeMainScene.start();
