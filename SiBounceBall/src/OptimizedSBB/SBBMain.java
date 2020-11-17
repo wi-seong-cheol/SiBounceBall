@@ -49,7 +49,7 @@ public class SBBMain
   private static Graphics2D g2d;
   private static AffineTransform at = new AffineTransform();
   public static MyKeyListener keyListener;
-  public static ArrayList<Spawn> living = new ArrayList<Spawn>();
+  //public static ArrayList<Spawn> living = new ArrayList<Spawn>();
   public static boolean isRunning = true;
   public static int sceneNum = 1;
   public static int login = 0;
@@ -135,10 +135,10 @@ public class SBBMain
         else g2d.drawImage(background.get(0), 0,0, null);
         
         // Draw entities////////////////////////////////////////////////////////////////////////////////////////
-        for (int i = 0; i < living.size(); i++) {
+        for (int i = 0; i < MakeGameComponents.living.size(); i++) {
           try {
-        	  at.translate(living.get(i).getX(), living.get(i).getY());
-        	  Spawn s = living.get(i);
+        	  at.translate(MakeGameComponents.living.get(i).getX(), MakeGameComponents.living.get(i).getY());
+        	  Spawn s = MakeGameComponents.living.get(i);
               if(s instanceof SpawnBall) { 
             	  //g2d.drawImage(sibaball,(int) (s.getX() ),(int) (s.getY() ), c);
             	  g2d.drawImage(sibaball2,(int) (s.getX() )+4,(int) (s.getY() ), c);
