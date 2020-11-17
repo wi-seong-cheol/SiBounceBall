@@ -5,7 +5,16 @@ public class MapDto {
 	int level; // 무슨 레벨의 맵인지
 	int ballX; // makeBall() x 좌표
 	int ballY; // makeBall() y 좌표
-	String[] rows = new String[20]; // 26bit String이 들어간다.
+	String[] rows = new String[26]; // 26bit String이 들어간다.
+	
+	public MapDto() {}
+	
+	public MapDto(int level, int ballX, int ballY, String[] rows) {
+		this.level = level;
+		this.ballX = ballX;
+		this.ballY = ballY;
+		this.rows  = rows;
+	}
 	
 	// getter
 	public int getLevel() {

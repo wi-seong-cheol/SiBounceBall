@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
-import conn.DBConnector;
 import dto.JoinDto;
 import dto.LoginDto;
+import dto.MapDto;
 import dto.UserDto;
 
 public class Dao {
@@ -107,45 +109,6 @@ public class Dao {
 		return dto;
 	}
 	
-/*
-	public int getHighestLevel(String id) {
-		int rsLevel = 1;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			conn = DriverManager.getConnection(url, "scott", "tiger");
-
-			String query = "select hLevel from users where id = ?";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				rsLevel = rs.getInt("hLevel");
-			}
-		} catch (Exception e1) {
-			System.out.println("errer in getHighestELevel() - e1 : ");
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e2) {
-				System.out.println("errer in getHighestLevel() - e2 : ");
-				e2.printStackTrace();
-			}
-		}
-
-		return rsLevel;
-	}
-	*/
 	
 	public void updateHighestLevel(String id, int level) throws Exception, SQLException {
 
@@ -181,6 +144,39 @@ public class Dao {
 
 	}
 
+	
+	
+	public List<MapDto> getMapList() throws Exception, SQLException{
+		List<MapDto> MapList  = new ArrayList<MapDto>();
+		
+		MapDto dto = null;
+
+		conn = dbc.getConnection();
+		
+		String query = "select * from maps";
+		
+		pstmt = conn.prepareStatement(query);
+		
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			int level = rs.getInt("level");
+			int ballX = rs.getInt("ballX");
+			int ballY = rs.getInt("ballY");
+			String[] rows = new String[26];
+			for (int i = 4; i < 24 ; i++) {
+				rows[i-4] = rs.getString(i);
+			}
+			
+			dto = new MapDto(level, ballX, ballY, rows);
+			MapList.add(dto);
+		}
+		
+		disconnect();
+		
+		return MapList;
+	}
+	
 	
 	public void disconnect() throws SQLException {
 		if(rs != null) rs.close();
