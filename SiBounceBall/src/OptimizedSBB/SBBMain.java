@@ -96,7 +96,8 @@ public class SBBMain
 //	    JoinDto dto = new JoinDto(id, nickname, pw);
 //	    int rn = dao.join(dto);
 //	    System.out.println("rn : " + rn);
-    new MakeUI();
+    MakeUI makeUI = new MakeUI();
+    makeUI.MakeScene();
     //new GameOver();
     moveEngine.start();
     makeMainScene.start();
