@@ -18,13 +18,23 @@ public class MakeMainScene extends Thread {
 	MakeScene8 s8 = new MakeScene8();
 	MakeScene9 s9 = new MakeScene9();
 	int sceneNum = SBBMain.sceneNum;
+	int n;
 	UserService user = new UserService();
+	
 	public void run() {
-		setScene(sceneNum);
+		n=sceneNum;
+		setScene();
+		showScene();
 		while (SBBMain.isRunning) {
-			if(star == 0) setScene(-2);
+			if(star == 0) {
+				n=-2;
+				setScene();
+				showScene();
+			}
 			if(sceneNum != SBBMain.sceneNum) {
-				setScene(SBBMain.sceneNum);
+				n=SBBMain.sceneNum;
+				setScene();
+				showScene();
 			}
 			try {
 				sleep(1);
@@ -33,36 +43,48 @@ public class MakeMainScene extends Thread {
 		}
 	}
 	
-	public synchronized void setScene(int n) {
+	public synchronized void currentStage() {
+		SBBMain.sceneNum = sceneNum;
+		n = sceneNum;
+	}
+	
+	public synchronized void nextStage() {
+		if(MoveEngine.constForces.size() == 0) 
+			MoveEngine.constForces.add(new Accel(0.0, SBBMain.GRAVITY));
+		    // moveL or R 상태로 별을 다먹고 다음스테이지로 갈때 멈춤방지
+		if(sceneNum == lastLevel)
+			this.sceneNum = 1;
+		else {
+			System.out.println("Clear");
+			
+			this.sceneNum++;
+			if(sceneNum > SBBMain.highestLevel + 1) {
+				SBBMain.highestLevel++;
+				user.updateHighestLevel(SBBMain.id,SBBMain.highestLevel);
+			}
+		}
+		SBBMain.sceneNum = sceneNum;
+		n = sceneNum;
+	}
+	
+	public synchronized void selectedStage() {
+		this.sceneNum = SBBMain.sceneNum;
+	}
+	
+	public synchronized void setScene() {
 		MakeGameComponents.living.clear();
 		SBBMain.inventory1 = false;
 		SBBMain.inventory2 = false;
 			
-		if(n == -1) {//repaint current Level
-			SBBMain.sceneNum = sceneNum;
-			n = sceneNum;
-		}
-		else if(n == -2) {//repaint next Level
-			if(MoveEngine.constForces.size() == 0) MoveEngine.constForces.add(new Accel(0.0, SBBMain.GRAVITY));
-			// moveL or R 상태로 별을 다먹고 다음스테이지로 갈때 멈춤방지
-			if(sceneNum == lastLevel) {
-				this.sceneNum = 1;
-			}
-			else {
-				System.out.println("Clear");
-				
-				this.sceneNum++;
-				if(sceneNum > SBBMain.highestLevel + 1) {
-					SBBMain.highestLevel++;
-					user.updateHighestLevel(SBBMain.id,SBBMain.highestLevel);
-				}
-			}
-			SBBMain.sceneNum = sceneNum;
-			n = sceneNum;
-		}
+		if(n == -1) //repaint current Level
+			currentStage();
+		else if(n == -2) //repaint next Level
+			nextStage();
 		else //repaint selected Level
-			this.sceneNum = SBBMain.sceneNum;
-		////////////////////////////////////////////////////////////
+			selectedStage();
+	}
+	
+	public synchronized void showScene() {
 		switch(n) {
 		case 1:
 			s1.makeScene();
@@ -96,4 +118,5 @@ public class MakeMainScene extends Thread {
 			break;
 		}
 	}
+	
 }
