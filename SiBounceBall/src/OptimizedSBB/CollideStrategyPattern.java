@@ -64,25 +64,25 @@ public class CollideStrategyPattern {
 		protected RightSideCollideStrategy rightCollide;
 		protected AllSideCollideStrategy allCollide;
 		
-		public void RegularJumpApply() {
+		public synchronized void RegularJumpApply() {
 			bottomCollide = new BsRegularJumpStrategy();
 			leftCollide = new LsRegularJumpStrategy();
 			rightCollide = new RsRegularJumpStrategy();
 		}
 		
-		public void topCollideHandling() {
+		public synchronized void topCollideHandling() {
 			topCollide.topCollideHandler();
 		}
-		public void leftCollideHandling() {
+		public synchronized void leftCollideHandling() {
 			leftCollide.leftCollideHandler();
 		}
-		public void rightCollideHandling() {
+		public synchronized void rightCollideHandling() {
 			rightCollide.rightCollideHandler();
 		}
-		public void bottomCollideHandling() {
+		public synchronized void bottomCollideHandling() {
 			bottomCollide.bottomCollideHandler();
 		}
-		public void allCollideHandling() {
+		public synchronized void allCollideHandling() {
 			allCollide.allCollideHandler();
 		}
 	}
@@ -177,18 +177,18 @@ public class CollideStrategyPattern {
 	}
 	public class TsRegularJumpStrategy implements TopSideCollideStrategy{
 		public synchronized void topCollideHandler() {
-			TsJump(-475);
+			TsJump(-450);
 		}
 	}
 	public class TsBreakableJumpStrategy implements TopSideCollideStrategy{
 		public synchronized void topCollideHandler() {
-			TsJump(-475);
+			TsJump(-450);
 			deleteObject();
 		}
 	}
 	public class TsBlockJumpStrategy implements TopSideCollideStrategy{
 		public synchronized void topCollideHandler() {
-			TsJump(-690);
+			TsJump(-650);
 		}
 	}
 	
@@ -215,7 +215,7 @@ public class CollideStrategyPattern {
 	public class LsRegularJumpStrategy implements LeftSideCollideStrategy {
 		public synchronized void leftCollideHandler() {
 			ball.updatePos(collidePos, ball.getY());
-			ball.updateVelocity((ball.vx() -80), ball.vy());
+			ball.updateVelocity((ball.vx() - 80), ball.vy());
 		}
 	}	
 	//우측 충돌 전략
@@ -241,6 +241,7 @@ public class CollideStrategyPattern {
 			ball.updatePos(ball.getX(), collidePos);
 			ball.updateVelocity(ball.vx(), (ball.vy() * -SBBMain.BOUNCE));
 			if(ball.vy()>100) ball.updateVelocity(ball.vx(), 150);
+			System.out.println("bottom collide");
 		}
 	}
 	

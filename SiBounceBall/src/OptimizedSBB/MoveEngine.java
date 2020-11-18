@@ -128,6 +128,11 @@ public class MoveEngine extends Thread
 		else return false;
 	}
 	
+	public double getTopSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getY() - obj.getLength()/weight - ball.getLength(); }
+	public double getDownSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getY() + obj.getLength()/weight + ball.getLength(); }
+	public double getRightSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getX() + obj.getLength()/weight + ball.getLength(); }
+	public double getLeftSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getX() - obj.getLength()/weight - ball.getLength(); }
+	
 	private synchronized void checkCollisions(SpawnBall ball)
 	{
 		boolean isCollision = false;
@@ -141,18 +146,26 @@ public class MoveEngine extends Thread
 				isCollision = checkRect(ball, obj);
 			}
 			if(isCollision) {
-				double topSideChk = obj.getY() - obj.getLength() - ball.getLength();
-				double downSideChk = obj.getY() + obj.getLength() + ball.getLength();
-				double leftSideChk = obj.getX() - obj.getLength() - ball.getLength();
-				double rightSideChk = obj.getX() + obj.getLength() + ball.getLength();
+				double topSideChk = getTopSideChk(obj,ball,2);
+				double downSideChk = getDownSideChk(obj,ball,2);
+				double leftSideChk = getLeftSideChk(obj,ball,2);
+				double rightSideChk = getRightSideChk(obj,ball,2);
 				CollideStrategyPattern collideObj = new CollideStrategyPattern(ball, obj, i, constForces);
+				
+				//System.out.println("topSidechk : "+topSideChk+", downSideChk : "+ downSideChk+", leftSideChk : "+ leftSideChk+", rightSideChk : "+ rightSideChk);
+				if(obj instanceof SpawnThorn) {
+					topSideChk = getTopSideChk(obj,ball,1);
+					downSideChk = getDownSideChk(obj,ball,1);
+					leftSideChk = getLeftSideChk(obj,ball,1);
+					rightSideChk = getRightSideChk(obj,ball,1);
+				}
 				
 				if(obj instanceof SpawnElectricity | obj instanceof SpawnItem1 | obj instanceof SpawnItem2|
 					obj instanceof SpawnStar){
 					collideObj.cObject.allCollideHandling();
 				}
 				else if((ball.getY() > topSideChk) && (ball.getY() < obj.getY())
-						&& (ball.getX()-1.5 > leftSideChk) && (ball.getX()+1.5 < rightSideChk) ) {
+						&& (ball.getX()-1.5 >= leftSideChk) && (ball.getX()+1.5 <= rightSideChk) ) {
 					collideObj.setCollidePos(topSideChk);
 					collideObj.cObject.topCollideHandling();
 				}
