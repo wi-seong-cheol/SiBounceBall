@@ -160,15 +160,16 @@ public class Dao {
 		rs = pstmt.executeQuery();
 		
 		if (rs.next()) {
-			int level = rs.getInt("level");
+			int level = rs.getInt("levelNum");
+			int star  = rs.getInt("star");
 			int ballX = rs.getInt("ballX");
 			int ballY = rs.getInt("ballY");
 			String[] rows = new String[26];
-			for (int i = 4; i < 24 ; i++) {
+			for (int i = 5; i < 25 ; i++) {
 				rows[i-4] = rs.getString(i);
 			}
 			
-			dto = new MapDto(level, ballX, ballY, rows);
+			dto = new MapDto(level, star, ballX, ballY, rows);
 			MapList.add(dto);
 		}
 		

@@ -3,14 +3,16 @@ package dto;
 public class MapDto {
 
 	int level; // ¹«½¼ ·¹º§ÀÇ ¸ÊÀÎÁö
+	int star;
 	int ballX; // makeBall() x ÁÂÇ¥
 	int ballY; // makeBall() y ÁÂÇ¥
 	String[] rows = new String[26]; // 26bit StringÀÌ µé¾î°£´Ù.
 	
 	public MapDto() {}
 	
-	public MapDto(int level, int ballX, int ballY, String[] rows) {
+	public MapDto(int level,int star, int ballX, int ballY, String[] rows) {
 		this.level = level;
+		this.star  = star;
 		this.ballX = ballX;
 		this.ballY = ballY;
 		this.rows  = rows;
@@ -19,6 +21,9 @@ public class MapDto {
 	// getter
 	public int getLevel() {
 		return level;
+	}
+	public int getStar() {
+		return star;
 	}
 	public int getBallX() {
 		return ballX;
@@ -34,6 +39,9 @@ public class MapDto {
 	//setter
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	public void setStar(int star) {
+		this.star = star;
 	}
 	public void setBallX(int ballX) {
 		this.ballX = ballX;
