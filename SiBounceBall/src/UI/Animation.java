@@ -9,8 +9,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-import Objects.*;
-import Scenes.*;
+import gamecomponents.*;
+import scenes.*;
 import OptimizedSBB.SBBMain;
 
 import java.awt.Color;
@@ -78,10 +78,10 @@ public class Animation extends SBBMain{
 						else if(s instanceof SpawnElectricity) {
 							g2d.drawImage(electricity,(int) (s.getX() ),(int) (s.getY() ), c);
 						}
-						else if(s instanceof SpawnItem1) {
+						else if(s instanceof SpawnDashItem) {
 							g2d.drawImage(item1,(int) (s.getX() ),(int) (s.getY() ), c);
 						}
-						else if(s instanceof SpawnItem2) {
+						else if(s instanceof SpawnJumpItem) {
 							g2d.drawImage(item2,(int) (s.getX() ),(int) (s.getY() ), c);
 						}
 						else if(s instanceof SpawnStar) {

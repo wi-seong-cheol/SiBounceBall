@@ -1,9 +1,10 @@
 package OptimizedSBB;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import Objects.*;
-import Scenes.MakeGameComponents;
-import Scenes.MakeMainScene;
+
+import gamecomponents.*;
+import scenes.MakeGameComponents;
+import scenes.MakeMainScene;
 
 public class MoveEngine extends Thread
 {
@@ -160,7 +161,7 @@ public class MoveEngine extends Thread
 					rightSideChk = getRightSideChk(obj,ball,1);
 				}
 				
-				if(obj instanceof SpawnElectricity | obj instanceof SpawnItem1 | obj instanceof SpawnItem2|
+				if(obj instanceof SpawnElectricity | obj instanceof SpawnDashItem | obj instanceof SpawnJumpItem|
 					obj instanceof SpawnStar){
 					collideObj.cObject.allCollideHandling();
 				}

@@ -23,12 +23,12 @@ import javax.swing.JFrame;
 
 import java.util.Scanner;
 
-import Objects.*;
-import Scenes.*;
 import UI.Animation;
 import UI.MakeUI;
 import UI.StageFrame;
 import dto.JoinDto;
+import gamecomponents.*;
+import scenes.*;
 
 public class SBBMain
 {

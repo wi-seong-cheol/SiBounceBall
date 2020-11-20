@@ -1,8 +1,8 @@
-package Scenes;
+package scenes;
 
 import java.util.ArrayList;
 
-import Objects.*;
+import gamecomponents.*;
 
 public class MakeGameComponents {
 	public static ArrayList<Spawn> living = new ArrayList<Spawn>();
@@ -22,11 +22,11 @@ public class MakeGameComponents {
 	public static synchronized void makeElectricity(int x, int y) {
 		living.add(new SpawnElectricity(x, y));
 	}
-	public static synchronized void makeItem1(int x, int y) {
-		living.add(new SpawnItem1(x, y));
+	public static synchronized void makeDashItem(int x, int y) {
+		living.add(new SpawnDashItem(x, y));
 	}
-	public static synchronized void makeItem2(int x, int y) {
-		living.add(new SpawnItem2(x, y));
+	public static synchronized void makeJumpItem(int x, int y) {
+		living.add(new SpawnJumpItem(x, y));
 	}
 	public static synchronized void makeStar(int x, int y) {
 		living.add(new SpawnStar(x, y));

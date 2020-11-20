@@ -2,7 +2,8 @@ package OptimizedSBB;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import Objects.*;
+
+import gamecomponents.*;
 
 public class MyKeyListener implements KeyListener {
 

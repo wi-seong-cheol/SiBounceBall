@@ -1,4 +1,4 @@
-package Scenes;
+package scenes;
 
 public class MakeScene2 extends MakeGameComponents {
 	int i;

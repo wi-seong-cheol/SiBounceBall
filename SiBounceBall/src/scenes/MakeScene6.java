@@ -1,4 +1,4 @@
-package Scenes;
+package scenes;
 
 public class MakeScene6 extends MakeGameComponents{
 	int i;
@@ -7,23 +7,23 @@ public class MakeScene6 extends MakeGameComponents{
 		  makeBall(40, 50);
 		  
 		  for(i=0; i<5; i++) makeStar(40, 130+i*30);
-		  makeItem2(40, 280);
+		  makeJumpItem(40, 280);
 		  makeWall(130, 280, 3);
 		  
 		  for(i=0; i<5; i++) makeStar(180, 190+i*30);
-		  makeItem2(180, 340);
+		  makeJumpItem(180, 340);
 		  makeWall(270, 340, 3);
 		  
 		  for(i=0; i<5; i++) makeStar(320, 250+i*30);
-		  makeItem2(320, 400);
+		  makeJumpItem(320, 400);
 		  makeWall(410, 400, 3);
 		  
 		  for(i=0; i<5; i++) makeStar(460, 310+i*30);
-		  makeItem2(460, 460);
+		  makeJumpItem(460, 460);
 		  makeWall(550, 460, 3);
 		  
 		  for(i=0; i<5; i++) makeStar(600, 370+i*30);
-		  makeItem2(600, 520);
+		  makeJumpItem(600, 520);
 		  
 		  makeWall(740, 540, 3);
 		  makeStar(740, 510);
