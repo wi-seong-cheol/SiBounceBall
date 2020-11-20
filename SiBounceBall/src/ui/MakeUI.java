@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,12 +7,13 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
-import OptimizedSBB.SBBMain;
 import dao.*;
 import dto.*;
+import optimizedSBB.SBBMain;
 import service.*;
 
 public class MakeUI extends JFrame {
+	
 	public static JFrame f = new JFrame();
 
 	public static ArrayList<ImageIcon> stageImage = new ArrayList<ImageIcon>();

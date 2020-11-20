@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import java.awt.Canvas;
 import java.awt.GraphicsEnvironment;
@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import OptimizedSBB.MyKeyListener;
-import OptimizedSBB.SBBMain;
+import optimizedSBB.MyKeyListener;
+import optimizedSBB.SBBMain;
 
 public class StageFrame extends SBBMain {
 	private static JButton menu = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/menu.png")));

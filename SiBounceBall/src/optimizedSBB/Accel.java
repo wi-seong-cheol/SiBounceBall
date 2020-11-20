@@ -1,4 +1,4 @@
-package OptimizedSBB;
+package optimizedSBB;
 /* <type>
  * Ball
  * Wall

@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
@@ -10,10 +10,11 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import gamecomponents.*;
+import optimizedSBB.SBBMain;
 import scenes.*;
-import OptimizedSBB.SBBMain;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Font;
 
 

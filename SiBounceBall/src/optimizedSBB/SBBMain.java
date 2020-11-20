@@ -1,4 +1,4 @@
-package OptimizedSBB;
+package optimizedSBB;
 
 import java.awt.Canvas;
 
@@ -23,12 +23,12 @@ import javax.swing.JFrame;
 
 import java.util.Scanner;
 
-import UI.Animation;
-import UI.MakeUI;
-import UI.StageFrame;
 import dto.JoinDto;
 import gamecomponents.*;
 import scenes.*;
+import ui.Animation;
+import ui.MakeUI;
+import ui.StageFrame;
 
 public class SBBMain
 {

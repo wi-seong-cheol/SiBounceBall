@@ -1,6 +1,6 @@
 package scenes;
 
-import OptimizedSBB.*;
+import optimizedSBB.*;
 import service.*;
 
 public class MakeMainScene extends Thread {

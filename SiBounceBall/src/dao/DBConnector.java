@@ -23,5 +23,4 @@ public class DBConnector {
 		Connection conn = DriverManager.getConnection(url, "scott", "tiger");
 		return conn;
 	}
-	
 }

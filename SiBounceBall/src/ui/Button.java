@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -10,7 +10,7 @@ import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import OptimizedSBB.SBBMain;
+import optimizedSBB.SBBMain;
 import service.UserService;
 
 class Button extends MakeUI {

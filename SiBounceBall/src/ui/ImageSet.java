@@ -1,10 +1,10 @@
-package UI;
+package ui;
 
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import OptimizedSBB.SBBMain;
+import optimizedSBB.SBBMain;
 
 public class ImageSet extends SBBMain {
 	public ImageSet() {};
