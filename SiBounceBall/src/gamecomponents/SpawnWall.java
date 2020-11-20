@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 
 public class SpawnWall extends Spawn {
 	public SpawnWall(int x, int y)

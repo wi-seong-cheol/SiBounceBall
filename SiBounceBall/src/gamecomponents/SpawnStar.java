@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 
 public class SpawnStar extends Spawn{
 	public SpawnStar(int x, int y) 

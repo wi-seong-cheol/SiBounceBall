@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 
 public class SpawnThorn extends Spawn{
 	public SpawnThorn(int x, int y)

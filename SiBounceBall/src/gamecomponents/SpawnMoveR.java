@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 
 public class SpawnMoveR extends Spawn{
 	public SpawnMoveR(int x, int y) 

@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 
 public class SpawnElectricity extends Spawn
 { 

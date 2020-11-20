@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 
 public class SpawnBreakable extends Spawn{
 	public SpawnBreakable(int x, int y)

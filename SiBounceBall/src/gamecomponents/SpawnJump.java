@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 
 public class SpawnJump extends Spawn{
 	public SpawnJump(int x, int y)

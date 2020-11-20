@@ -1,4 +1,4 @@
-package Scenes;
+package scenes;
 
 public class MakeScene8 extends MakeGameComponents{
 	int i;
@@ -31,13 +31,13 @@ public class MakeScene8 extends MakeGameComponents{
 		makeJump(470, 420);
 		makeJump(500, 270);
 		
-		makeItem2(500, 240);
+		makeJumpItem(500, 240);
 		for(i=0;i <3; i++) makeElectricity(590,240+i*150);
 		for(i=0; i<3; i++) makeStar(590, 210+ i*150);
 		//makeStar(590, 180);
-		makeItem2(620, 120);
-		makeItem2(560, 390);
-		makeItem2(620, 540);
+		makeJumpItem(620, 120);
+		makeJumpItem(560, 390);
+		makeJumpItem(620, 540);
 		
 		makeStar(560, 240);
 		makeStar(620, 240);

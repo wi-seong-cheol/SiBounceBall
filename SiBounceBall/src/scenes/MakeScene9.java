@@ -1,11 +1,11 @@
-package Scenes;
+package scenes;
 
 public class MakeScene9 extends MakeGameComponents{
    int i;
    public void makeScene() {
-      MakeMainScene.star = 4;
+        MakeMainScene.star = 4;
         makeBall(320, 150);
-        makeItem1(150, 900);
+        makeDashItem(150, 900);
         for(i=0; i<11; i++) makeWall(150, 120+ 30*i, 1);
         makeWall(180, 420, 4);
         
@@ -23,7 +23,7 @@ public class MakeScene9 extends MakeGameComponents{
         makeElectricity(290, 300);
         makeElectricity(290, 270);
         
-        makeItem2(390, 240);
+        makeJumpItem(390, 240);
         for(i=0; i<2; i++) makeBreakable(390, 270+ i*30);
         
         makeStar(600, 390);
@@ -34,7 +34,7 @@ public class MakeScene9 extends MakeGameComponents{
         makeElectricity(520, 270);
         
         for(i=0; i<7; i++) makeWall(180+ 30*i, 90, 1);
-        makeItem1(390, 90);
+        makeDashItem(390, 90);
         for(i=0; i<7; i++) makeWall(420+ 30*i, 90, 1);
         
         makeWall(600, 420, 4);

@@ -1,4 +1,4 @@
-package Objects;
+package gamecomponents;
 import java.util.ArrayList;
 
 import OptimizedSBB.Accel;

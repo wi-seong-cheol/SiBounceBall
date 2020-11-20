@@ -2,9 +2,10 @@ package OptimizedSBB;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import Objects.*;
-import Scenes.MakeGameComponents;
-import Scenes.MakeMainScene;
+
+import gamecomponents.*;
+import scenes.MakeGameComponents;
+import scenes.MakeMainScene;
 
 public class CollideStrategyPattern {
 	public SpawnBall ball;
@@ -37,10 +38,10 @@ public class CollideStrategyPattern {
 		else if(object instanceof SpawnElectricity) {
 			cObject = new Electricity();
 		}
-		else if(object instanceof SpawnItem1) {
+		else if(object instanceof SpawnDashItem) {
 			cObject = new Item1();
 		}
-		else if(object instanceof SpawnItem2) {
+		else if(object instanceof SpawnJumpItem) {
 			cObject = new Item2();
 		}
 		else if(object instanceof SpawnStar) {

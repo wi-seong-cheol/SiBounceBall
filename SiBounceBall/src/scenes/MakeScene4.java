@@ -1,4 +1,4 @@
-package Scenes;
+package scenes;
 
 public class MakeScene4 extends MakeGameComponents{
 	int i;
@@ -33,7 +33,7 @@ public class MakeScene4 extends MakeGameComponents{
 		for(i=0; i<3; i++)makeThorn(510 + i*30, 420, 4);
 		
 		for(i=0; i<3; i++)makeWall(390 + i*30, 510, 4);
-		makeItem1(420, 480);
+		makeDashItem(420, 480);
 		for(i=0; i<3; i++)makeWall(150 + i*30, 510, 4);
 		for(i=0; i<2; i++)makeStar(180, 480 - i*30);
 	}
