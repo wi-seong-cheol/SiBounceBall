@@ -12,7 +12,7 @@ public class CollideHandler extends CollideStrategy {
 	
 	public CollideHandler(Spawn object, int collideObjIdx, ArrayList<Accel> constForces) {
 		super(object, collideObjIdx, constForces);
-		setCollideObject();
+		setCollideGameComponent();
 	}
 	
 	public abstract class CollideGameComponent{
@@ -45,7 +45,7 @@ public class CollideHandler extends CollideStrategy {
 		}
 	}
 	
-	public void setCollideObject() {
+	public void setCollideGameComponent() {
 		if(object instanceof SpawnWall) {
 			gameComponent = new Wall();
 		}
