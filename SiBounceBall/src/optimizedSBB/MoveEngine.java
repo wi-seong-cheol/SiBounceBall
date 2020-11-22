@@ -151,9 +151,8 @@ public class MoveEngine extends Thread
 				double downSideChk = getDownSideChk(obj,ball,2);
 				double leftSideChk = getLeftSideChk(obj,ball,2);
 				double rightSideChk = getRightSideChk(obj,ball,2);
-				CollideStrategyPattern collideObj = new CollideStrategyPattern(ball, obj, i, constForces);
+				CollideHandler collideHandler = new CollideHandler(obj, i, constForces);
 				
-				//System.out.println("topSidechk : "+topSideChk+", downSideChk : "+ downSideChk+", leftSideChk : "+ leftSideChk+", rightSideChk : "+ rightSideChk);
 				if(obj instanceof SpawnThorn) {
 					topSideChk = getTopSideChk(obj,ball,1);
 					downSideChk = getDownSideChk(obj,ball,1);
@@ -163,25 +162,25 @@ public class MoveEngine extends Thread
 				
 				if(obj instanceof SpawnElectricity | obj instanceof SpawnDashItem | obj instanceof SpawnJumpItem|
 					obj instanceof SpawnStar){
-					collideObj.cObject.allCollideHandling();
+					collideHandler.gameComponent.allCollideHandling();
 				}
 				else if((ball.getY() > topSideChk) && (ball.getY() < obj.getY())
 						&& (ball.getX()-1.5 >= leftSideChk) && (ball.getX()+1.5 <= rightSideChk) ) {
-					collideObj.setCollidePos(topSideChk);
-					collideObj.cObject.topCollideHandling();
+					collideHandler.setCollidePos(topSideChk);
+					collideHandler.gameComponent.topCollideHandling();
 				}
 				else if((ball.getY() < downSideChk) && (ball.getY() > obj.getY()) 
 						&& (ball.getX()-1.5 > leftSideChk) && (ball.getX()+1.5 < rightSideChk)) {
-					collideObj.setCollidePos(downSideChk);
-					collideObj.cObject.bottomCollideHandling();
+					collideHandler.setCollidePos(downSideChk);
+					collideHandler.gameComponent.bottomCollideHandling();
 				}
 				else if((ball.getX() > leftSideChk) && (ball.getX() < obj.getX())) {
-					collideObj.setCollidePos(leftSideChk);
-					collideObj.cObject.leftCollideHandling();
+					collideHandler.setCollidePos(leftSideChk);
+					collideHandler.gameComponent.leftCollideHandling();
 				}
 				else if((ball.getX() < rightSideChk) && (ball.getX() > obj.getX())) {
-					collideObj.setCollidePos(rightSideChk);
-					collideObj.cObject.rightCollideHandling();
+					collideHandler.setCollidePos(rightSideChk);
+					collideHandler.gameComponent.rightCollideHandling();
 				}
 			}
 		}
