@@ -11,13 +11,22 @@ public class MapService {
 	int levelNum = 0; 
 	
 	public MapService() {
-		try {
-			MapList = Dao.getInstance().getMapList();
-			levelNum = MapList.size();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	      
+	      /* DB O 
+	      try {
+	         MapList = Dao.getInstance().getMapList();
+	         levelNum = MapList.size();
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      */
+	      
+	      /* DB X */
+	      MapList tmp = new MapList();
+	      MapList = tmp.getMapList();
+	      levelNum = MapList.size();
+	      
+	   }
 
 	// getter
 	public List<MapDto> getMapList() {
