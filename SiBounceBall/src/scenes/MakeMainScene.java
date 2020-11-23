@@ -8,8 +8,7 @@ import java.util.List;
 
 public class MakeMainScene extends Thread {
 	// 새로운 Scene 추가시 lastLevel 업데이트 필수...!!!
-	// 새로운 Scene 추가시 makeBall은 항상 맨처음에...!!!
-	MakeScene s=new MakeScene();
+	// 새로운 Scene 추가시 makeBall은 항상 맨처음에...!!
 	public static int star=1;
 	private int lastLevel = 9;
 	int sceneNum = SBBMain.sceneNum;
@@ -92,9 +91,8 @@ public class MakeMainScene extends Thread {
 		for(int j=0; j<20; j++) {
 			char[] rowToChar = m.getRow(j).toCharArray();
 			for(int i=0; i<26; i++) {
-				s.makeScene(rowToChar[i], i, j);
+				MakeScene.makeScene(rowToChar[i], i, j);
 			}
 		}
 	}
-	
 }

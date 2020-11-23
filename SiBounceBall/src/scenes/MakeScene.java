@@ -1,7 +1,7 @@
 package scenes;
 
 public class MakeScene extends MakeGameComponents{
-  public void makeScene(char ch, int i, int j) {
+  public static void makeScene(char ch, int i, int j) {
 	  switch(ch) {
 		case '1':
 			makeWall(i*30, j*30, 4); //벽 종류 임시
