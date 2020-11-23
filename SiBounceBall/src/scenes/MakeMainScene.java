@@ -81,17 +81,19 @@ public class MakeMainScene extends Thread {
 	}
 	
 	public synchronized void drawScene() {
-		MapDto m = MapList.get(n-1);
-		int x = m.getBallX();
-		int y = m.getBallY();
-		MakeGameComponents.makeBall(x,y);
-		
-		star = m.getStar();
-		
-		for(int j=0; j<20; j++) {
-			char[] rowToChar = m.getRow(j).toCharArray();
-			for(int i=0; i<26; i++) {
-				MakeScene.makeScene(rowToChar[i], i, j);
+		if(n>0 && n<9) {
+			MapDto m = MapList.get(n-1);
+			int x = m.getBallX();
+			int y = m.getBallY();
+			MakeGameComponents.makeBall(x,y);
+			
+			star = m.getStar();
+			
+			for(int j=0; j<20; j++) {
+				char[] rowToChar = m.getRow(j).toCharArray();
+				for(int i=0; i<26; i++) {
+					MakeScene.makeScene(rowToChar[i], i, j);
+				}
 			}
 		}
 	}
