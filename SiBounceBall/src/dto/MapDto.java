@@ -1,16 +1,19 @@
 package dto;
 
 public class MapDto {
-
-	int level; // ¹«½¼ ·¹º§ÀÇ ¸ÊÀÎÁö
+	int level; // ë¬´ìŠ¨ ë ˆë²¨ì˜ ë§µì¸ì§€
 	int star;
-	int ballX; // makeBall() x ÁÂÇ¥
-	int ballY; // makeBall() y ÁÂÇ¥
-	String[] rows = new String[26]; // 26bit StringÀÌ µé¾î°£´Ù.
+	int ballX; // makeBall() x ì¢Œí‘œ
+	int ballY; // makeBall() y ì¢Œí‘œ
+	String[] rows = new String[20]; // 20ê°œì˜ String ë°°ì—´
 	
-	public MapDto() {}
+	public MapDto() {
+		for(int i=0; i < 20; i++) {
+			rows[i] = "00000000000000000000000000";
+		}
+	}
 	
-	public MapDto(int level,int star, int ballX, int ballY, String[] rows) {
+	public MapDto(int level, int star, int ballX, int ballY, String[] rows) {
 		this.level = level;
 		this.star  = star;
 		this.ballX = ballX;
@@ -34,6 +37,9 @@ public class MapDto {
 	public String[] getRows() {
 		return rows;
 	}
+	public String getRow(int row) {
+		return rows[row];
+	}
 	
 	
 	//setter
@@ -53,7 +59,14 @@ public class MapDto {
 		this.rows = rows;
 	}
 	
-
+	public void setRow(int row, String str) {
+		rows[row] = str;
+	}
+	
+//	public void setBlock(int row, int column, char blockNum) {
+//		String tmp = this.rows[row];
+//		tmp.charAt(column) = blockNum;
+//	}
 	
 	/*
 	
@@ -70,7 +83,5 @@ public class MapDto {
 	A : moveR
 	
 	*/
-	
-	
 	
 }

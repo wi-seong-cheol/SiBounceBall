@@ -164,7 +164,7 @@ public class Dao {
 			int star  = rs.getInt("star");
 			int ballX = rs.getInt("ballX");
 			int ballY = rs.getInt("ballY");
-			String[] rows = new String[26];
+			String[] rows = new String[20];
 			for (int i = 5; i < 25 ; i++) {
 				rows[i-4] = rs.getString(i);
 			}
