@@ -2,7 +2,7 @@ package gamecomponents;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-import optimizedSBB.Accel;
+import moveengine.Accel;
 /* <type>
  * Ball
  * Wall

@@ -1,7 +1,7 @@
 package gamecomponents;
 import java.util.ArrayList;
 
-import optimizedSBB.Accel;
+import moveengine.Accel;
 
 public class SpawnBall extends Spawn
 {

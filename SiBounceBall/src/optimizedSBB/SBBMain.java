@@ -25,6 +25,7 @@ import java.util.Scanner;
 
 import dto.JoinDto;
 import gamecomponents.*;
+import moveengine.MoveEngine;
 import scenes.*;
 import ui.Animation;
 import ui.MakeUI;
