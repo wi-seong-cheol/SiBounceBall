@@ -1,4 +1,4 @@
-package moveengine.rightsidecollide;
+package moveengine.collidestrategy.rightsidecollide;
 
 import moveengine.CollideGameComponent;
 

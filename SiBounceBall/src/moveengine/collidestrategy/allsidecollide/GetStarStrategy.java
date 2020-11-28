@@ -1,4 +1,4 @@
-package moveengine.allsidecollide;
+package moveengine.collidestrategy.allsidecollide;
 
 import moveengine.CollideGameComponent;
 import scenes.MakeMainScene;

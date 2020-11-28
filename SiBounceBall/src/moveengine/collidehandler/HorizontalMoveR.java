@@ -2,12 +2,12 @@ package moveengine.collidehandler;
 
 import moveengine.CollideGameComponent;
 import moveengine.CollideHandler;
-import moveengine.topsidecollide.*;
+import moveengine.collidestrategy.topsidecollide.*;
 
 public class HorizontalMoveR extends CollideHandler{
 	public HorizontalMoveR(CollideGameComponent CGC) {
 		super(CGC);
-		topCollide = new TsRightMoveStrategy();
-		regularJumpApply();
+		setTopCollideStrategy(new TsRightMoveStrategy());
+		setRegularJumpApply();
 	}
 }

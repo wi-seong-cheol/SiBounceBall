@@ -2,12 +2,12 @@ package moveengine.collidehandler;
 
 import moveengine.CollideGameComponent;
 import moveengine.CollideHandler;
-import moveengine.topsidecollide.TsResetStrategy;
+import moveengine.collidestrategy.topsidecollide.TsResetStrategy;
 
 public class Thorn extends CollideHandler{
 	public Thorn(CollideGameComponent CGC) {
 		super(CGC);
-		topCollide = new TsResetStrategy();
-		regularJumpApply();
+		setTopCollideStrategy(new TsResetStrategy());
+		setRegularJumpApply();
 	}
 }

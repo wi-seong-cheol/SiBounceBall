@@ -7,6 +7,7 @@ public class SpawnMoveL extends Spawn{
 	    this.y = y;
 	    this.type = 1;
 	    this.length = 30;
+	    this.collideType = DIFFERACTION;
 	}
 	
 }

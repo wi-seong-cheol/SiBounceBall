@@ -148,10 +148,6 @@ public class MoveEngine extends Thread
 				isCollision = checkRect(ball, obj);
 			}
 			if(isCollision) {
-				double topSideChk = getTopSideChk(obj,ball,2);
-				double downSideChk = getDownSideChk(obj,ball,2);
-				double leftSideChk = getLeftSideChk(obj,ball,2);
-				double rightSideChk = getRightSideChk(obj,ball,2);
 				CollideHandler gameComponent = null;
 				CollideGameComponent CGC = new CollideGameComponent(obj,i,constForces);
 				
@@ -186,35 +182,7 @@ public class MoveEngine extends Thread
 					gameComponent = new HorizontalMoveR(CGC);
 				}
 				
-				if(obj instanceof SpawnThorn) {
-					topSideChk = getTopSideChk(obj,ball,1);
-					downSideChk = getDownSideChk(obj,ball,1);
-					leftSideChk = getLeftSideChk(obj,ball,1);
-					rightSideChk = getRightSideChk(obj,ball,1);
-				}
-				
-				if(obj instanceof SpawnElectricity | obj instanceof SpawnDashItem | obj instanceof SpawnJumpItem|
-					obj instanceof SpawnStar){
-					gameComponent.allCollideHandling();
-				}
-				else if((ball.getY() > topSideChk) && (ball.getY() < obj.getY())
-						&& (ball.getX()-1.5 >= leftSideChk) && (ball.getX()+1.5 <= rightSideChk) ) {
-					CGC.setCollidePos(topSideChk);
-					gameComponent.topCollideHandling();
-				}
-				else if((ball.getY() < downSideChk) && (ball.getY() > obj.getY()) 
-						&& (ball.getX()-1.5 > leftSideChk) && (ball.getX()+1.5 < rightSideChk)) {
-					CGC.setCollidePos(downSideChk);
-					gameComponent.bottomCollideHandling();
-				}
-				else if((ball.getX() > leftSideChk) && (ball.getX() < obj.getX())) {
-					CGC.setCollidePos(leftSideChk);
-					gameComponent.leftCollideHandling();
-				}
-				else if((ball.getX() < rightSideChk) && (ball.getX() > obj.getX())) {
-					CGC.setCollidePos(rightSideChk);
-					gameComponent.rightCollideHandling();
-				}
+				gameComponent.collideHandling();
 			}
 		}
 	}

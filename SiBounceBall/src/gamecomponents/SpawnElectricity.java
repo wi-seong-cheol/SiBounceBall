@@ -8,6 +8,7 @@ public class SpawnElectricity extends Spawn
     this.y = y;
     this.type = 0;
     this.length = 15.0;
+    this.collideType = SAMEACTION;
   }
   
   @Override

@@ -2,7 +2,7 @@ package moveengine.collidehandler;
 
 import moveengine.CollideGameComponent;
 import moveengine.CollideHandler;
-import moveengine.allsidecollide.GetJumpItemStrategy;
+import moveengine.collidestrategy.allsidecollide.GetJumpItemStrategy;
 
 public class JumpItem extends CollideHandler{
 	public JumpItem(CollideGameComponent CGC) {
