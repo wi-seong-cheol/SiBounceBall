@@ -50,14 +50,16 @@ public class ImageSet extends SBBMain {
 	public static void getImageBack() {
 		for(i = 1; i <= backgrounds - 1; i++) 
 			background.add(new ImageIcon(SBBMain.class.getResource("../Image/background" + String.valueOf(i) + ".png")).getImage());	
-		background.add(new ImageIcon(SBBMain.class.getResource("../Image/background3.png")).getImage());
+		background.add(new ImageIcon(SBBMain.class.getResource("../Image/background3.jpg")).getImage());
 	}
+	
 	
 	public static void getImageWall() {
 		for(i = 1; i <= wallImages; i++)
 			wallImage.add(new ImageIcon(SBBMain.class.getResource("../Image/wall" + String.valueOf(i) + ".png")).getImage());		
 	}
-		
+	
+	
 	public static void getImageThorn() {
 		for(i = 1; i <= thorns; i++) 
 			thorn.add(new ImageIcon(SBBMain.class.getResource("../Image/thorn" + String.valueOf(i) + ".png")).getImage());
