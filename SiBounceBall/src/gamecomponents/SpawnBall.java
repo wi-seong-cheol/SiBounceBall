@@ -1,7 +1,7 @@
 package gamecomponents;
 import java.util.ArrayList;
 
-import optimizedSBB.Accel;
+import moveengine.Accel;
 
 public class SpawnBall extends Spawn
 {
@@ -19,6 +19,7 @@ public class SpawnBall extends Spawn
     this.vy = 0;
     this.type = 0;
     this.length = 13.0; // 반지름 !!
+    this.collideType = DIFFERACTION;
   }
 
   public Accel sumAccel()

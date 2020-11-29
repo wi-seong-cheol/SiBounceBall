@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import gamecomponents.*;
+import moveengine.Accel;
+import moveengine.MoveEngine;
 
 public class MyKeyListener implements KeyListener {
 

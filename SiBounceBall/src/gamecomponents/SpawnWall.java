@@ -7,6 +7,7 @@ public class SpawnWall extends Spawn {
 		this.y = y;
 		this.type = 1;
 		this.length = 30;
+		this.collideType = DIFFERACTION;
 	}
 	
 	public SpawnWall(int x, int y, int n)

@@ -7,5 +7,6 @@ public class SpawnBreakable extends Spawn{
 		this.y = y;
 		this.type = 1;
 		this.length = 24;
+		this.collideType = DIFFERACTION;
 	}
 }

@@ -7,6 +7,7 @@ public class SpawnThorn extends Spawn{
 		this.y = y;
 		this.type = 0;
 		this.length = 14;
+		this.collideType = DIFFERACTION;
 	}
 	
 	public SpawnThorn(int x, int y, int n)

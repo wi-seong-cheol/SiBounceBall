@@ -2,7 +2,7 @@ package gamecomponents;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-import optimizedSBB.Accel;
+import moveengine.Accel;
 /* <type>
  * Ball
  * Wall
@@ -21,6 +21,9 @@ public class Spawn
   protected int type; // check collide 기준이 원인지 사각형인지 구분. 0 : 원, 1 : 사각형
   public int num=0; // 이미지 개수가 여러개인 obj만 사용
   protected ArrayList<Accel> Accelerations = new ArrayList<Accel>();
+  public int collideType; 
+  public static final int SAMEACTION = 0;
+  public static final int DIFFERACTION = 1;
   
   public void updatePos(double newX, double newY)
   {
