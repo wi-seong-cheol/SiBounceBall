@@ -1,5 +1,8 @@
 package gamecomponents;
 
+import moveengine.CollideGameComponent;
+import moveengine.collidehandler.Wall;
+
 public class SpawnWall extends Spawn {
 	public SpawnWall(int x, int y)
 	{
@@ -14,6 +17,9 @@ public class SpawnWall extends Spawn {
 	{
 		this(x,y);
 		this.num = n;
+	}
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new Wall(CGC);
 	}
 	
 }

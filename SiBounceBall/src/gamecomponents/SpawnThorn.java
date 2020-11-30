@@ -1,5 +1,8 @@
 package gamecomponents;
 
+import moveengine.CollideGameComponent;
+import moveengine.collidehandler.Thorn;
+
 public class SpawnThorn extends Spawn{
 	public SpawnThorn(int x, int y)
 	{
@@ -14,6 +17,9 @@ public class SpawnThorn extends Spawn{
 	{
 		this(x,y);
 		this.num = n;
+	}
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new Thorn(CGC);
 	}
 	
 }

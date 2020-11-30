@@ -1,5 +1,8 @@
 package gamecomponents;
 
+import moveengine.CollideGameComponent;
+import moveengine.collidehandler.HorizontalMoveL;
+
 public class SpawnMoveL extends Spawn{
 	public SpawnMoveL(int x, int y) 
 	{
@@ -9,5 +12,7 @@ public class SpawnMoveL extends Spawn{
 	    this.length = 30;
 	    this.collideType = DIFFERACTION;
 	}
-	
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new HorizontalMoveL(CGC);
+	}
 }

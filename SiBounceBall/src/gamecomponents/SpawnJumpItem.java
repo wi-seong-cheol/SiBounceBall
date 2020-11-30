@@ -1,5 +1,8 @@
 package gamecomponents;
 
+import moveengine.CollideGameComponent;
+import moveengine.collidehandler.JumpItem;
+
 public class SpawnJumpItem extends Spawn{
 	public SpawnJumpItem(int x, int y)
 	{
@@ -9,5 +12,7 @@ public class SpawnJumpItem extends Spawn{
 		this.length = 30;
 		this.collideType = SAMEACTION;
 	}
-	
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new JumpItem(CGC);
+	}
 }

@@ -3,6 +3,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import moveengine.Accel;
+import moveengine.CollideGameComponent;
+import moveengine.CollideHandler;
 /* <type>
  * Ball
  * Wall
@@ -15,7 +17,7 @@ import moveengine.Accel;
  * MoveL
  * MoveR
  */
-public class Spawn
+public abstract class Spawn
 {
   protected double x, y, length;
   protected int type; // check collide 기준이 원인지 사각형인지 구분. 0 : 원, 1 : 사각형
@@ -24,6 +26,9 @@ public class Spawn
   public int collideType; 
   public static final int SAMEACTION = 0;
   public static final int DIFFERACTION = 1;
+  
+  public CollideHandler collideHandler;
+  public abstract void setCollideHandler(CollideGameComponent CGC);
   
   public void updatePos(double newX, double newY)
   {

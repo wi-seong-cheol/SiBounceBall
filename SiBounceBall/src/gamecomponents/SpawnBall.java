@@ -2,6 +2,7 @@ package gamecomponents;
 import java.util.ArrayList;
 
 import moveengine.Accel;
+import moveengine.CollideGameComponent;
 
 public class SpawnBall extends Spawn
 {
@@ -32,6 +33,8 @@ public class SpawnBall extends Spawn
     this.Accelerations.clear();
     return new Accel(xAccel, yAccel);
   }
+  
+  public void setCollideHandler(CollideGameComponent CGC) { }
 
   public void addAccel(Accel a)
   {

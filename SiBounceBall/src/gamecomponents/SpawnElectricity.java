@@ -1,5 +1,8 @@
 package gamecomponents;
 
+import moveengine.CollideGameComponent;
+import moveengine.collidehandler.Electricity;
+
 public class SpawnElectricity extends Spawn
 { 
   public SpawnElectricity(int x, int y)
@@ -31,4 +34,8 @@ public class SpawnElectricity extends Spawn
   {
     return this.y + length;
   }
+  
+  public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new Electricity(CGC);
+	}
 }

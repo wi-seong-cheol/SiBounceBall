@@ -3,7 +3,6 @@ package moveengine;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import gamecomponents.*;
-import moveengine.collidehandler.*;
 import optimizedSBB.SBBMain;
 import scenes.MakeGameComponents;
 
@@ -129,12 +128,7 @@ public class MoveEngine extends Thread
 		}
 		else return false;
 	}
-	
-	public double getTopSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getY() - obj.getLength()/weight - ball.getLength(); }
-	public double getDownSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getY() + obj.getLength()/weight + ball.getLength(); }
-	public double getRightSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getX() + obj.getLength()/weight + ball.getLength(); }
-	public double getLeftSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getX() - obj.getLength()/weight - ball.getLength(); }
-	
+
 	private synchronized void checkCollisions(SpawnBall ball)
 	{
 		boolean isCollision = false;
@@ -148,41 +142,9 @@ public class MoveEngine extends Thread
 				isCollision = checkRect(ball, obj);
 			}
 			if(isCollision) {
-				CollideHandler gameComponent = null;
 				CollideGameComponent CGC = new CollideGameComponent(obj,i,constForces);
-				
-				if(obj instanceof SpawnWall) {
-					gameComponent = new Wall(CGC);
-				}
-				else if(obj instanceof SpawnJump) {
-					gameComponent = new JumpBlock(CGC);
-				}
-				else if(obj instanceof SpawnThorn) {
-					gameComponent = new Thorn(CGC);
-				}
-				else if(obj instanceof SpawnElectricity) {
-					gameComponent = new Electricity(CGC);
-				}
-				else if(obj instanceof SpawnDashItem) {
-					gameComponent = new DashItem(CGC);
-				}
-				else if(obj instanceof SpawnJumpItem) {
-					gameComponent = new JumpItem(CGC);
-				}
-				else if(obj instanceof SpawnStar) {
-					gameComponent = new Star(CGC);
-				}
-				else if(obj instanceof SpawnBreakable) {
-					gameComponent = new BreakableBlock(CGC);
-				}
-				else if(obj instanceof SpawnMoveL) {
-					gameComponent = new HorizontalMoveL(CGC);
-				}
-				else if(obj instanceof SpawnMoveR) {
-					gameComponent = new HorizontalMoveR(CGC);
-				}
-				
-				gameComponent.collideHandling();
+				obj.setCollideHandler(CGC);
+				obj.collideHandler.collideHandling();
 			}
 		}
 	}
