@@ -3,6 +3,7 @@ package scenes;
 import optimizedSBB.*;
 import service.*;
 import dto.MapDto;
+import gamecomponents.*;
 import moveengine.Accel;
 import moveengine.MoveEngine;
 
@@ -22,17 +23,17 @@ public class MakeMainScene extends Thread {
 	public void run() {
 		n=sceneNum;
 		setScene();
-		drawScene();
+		buildScene();
 		while (SBBMain.isRunning) {
 			if(star == 0) {
 				n=-2;
 				setScene();
-				drawScene();
+				buildScene();
 			}
 			if(sceneNum != SBBMain.sceneNum) {
 				n=SBBMain.sceneNum;
 				setScene();
-				drawScene();
+				buildScene();
 			}
 			try {
 				sleep(1);
@@ -49,7 +50,7 @@ public class MakeMainScene extends Thread {
 	public synchronized void nextStage() {
 		if(MoveEngine.constForces.size() == 0) 
 			MoveEngine.constForces.add(new Accel(0.0, SBBMain.GRAVITY));
-		    // moveL or R 상태로 별을 다먹고 다음스테이지로 갈때 멈춤방지
+		// moveL or R 상태로 별을 다먹고 다음스테이지로 갈때 멈춤방지
 		if(sceneNum == lastLevel)
 			this.sceneNum = 1;
 		else {
@@ -82,19 +83,21 @@ public class MakeMainScene extends Thread {
 			selectedStage();
 	}
 	
-	public synchronized void drawScene() {
+	public synchronized void buildScene() {
 		if(n>0 && n<9) {
 			MapDto m = MapList.get(n-1);
 			int x = m.getBallX();
 			int y = m.getBallY();
-			MakeGameComponents.makeBall(x,y);
+			Spawn ball = new SpawnBall(x, y);
+			MakeGameComponents.addBlock(ball);
 			
 			star = m.getStar();
+			MakeGameComponents.setBlockType(n);
 			
 			for(int j=0; j<20; j++) {
 				char[] rowToChar = m.getRow(j).toCharArray();
 				for(int i=0; i<26; i++) {
-					MakeScene.makeScene(rowToChar[i], i, j);
+					MakeGameComponents.makeScene(rowToChar[i], i*30, j*30);
 				}
 			}
 		}
