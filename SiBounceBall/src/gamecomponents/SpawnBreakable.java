@@ -3,12 +3,11 @@ package gamecomponents;
 import java.awt.Image;
 
 import moveengine.CollideGameComponent;
-import moveengine.collidestrategy.topsidecollide.TsBreakableJumpStrategy;
+import moveengine.collidehandler.BreakableBlock;
 import view.ImageSet;
 
 public class SpawnBreakable extends Spawn{
 	public SpawnBreakable(int x, int y) {
-		super(x,y);
 		this.x = x;
 		this.y = y;
 		this.type = 1;
@@ -16,18 +15,12 @@ public class SpawnBreakable extends Spawn{
 		this.collideType = DIFFERACTION;
 	}
 	
-	public SpawnBreakable(CollideGameComponent CGC) {
-		super(CGC);
-		setTopCollideStrategy(new TsBreakableJumpStrategy());
-		setRegularJumpApply();
-	}
-
 	public Image getImage() {
 		this.imageIcon = ImageSet.breakable;
 		return this.imageIcon;
 	}
-
-	public int getTypeCode() {
-		return Spawn.SPAWNBREAKABLE;
+	
+	public void setCollideHandler(CollideGameComponent CGC) {
+		collideHandler = new BreakableBlock(CGC);
 	}
 }

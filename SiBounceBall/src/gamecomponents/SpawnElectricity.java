@@ -3,27 +3,21 @@ package gamecomponents;
 import java.awt.Image;
 
 import moveengine.CollideGameComponent;
-import moveengine.collidestrategy.allsidecollide.ElectricityCollideStrategy;
+import moveengine.collidehandler.Electricity;
 import view.ImageSet;
 
 public class SpawnElectricity extends Spawn
 { 
 	public SpawnElectricity(int x, int y) {
-		super(x,y);
 		this.x = x;
 		this.y = y;
 		this.type = 0;
 		this.length = 15.0;
 		this.collideType = SAMEACTION;
 	}
-
-	public SpawnElectricity(CollideGameComponent CGC) {
-		super(CGC);
-		allCollide = new ElectricityCollideStrategy();
-	}
-
-	public int getTypeCode() {
-		return Spawn.SPAWNELECTRICITY;
+	
+	 public void setCollideHandler(CollideGameComponent CGC) { 
+			this.collideHandler = new Electricity(CGC);
 	}
 
 	public Image getImage() {

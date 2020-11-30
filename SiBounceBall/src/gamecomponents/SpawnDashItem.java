@@ -3,12 +3,11 @@ package gamecomponents;
 import java.awt.Image;
 
 import moveengine.CollideGameComponent;
-import moveengine.collidestrategy.allsidecollide.GetDashItemStrategy;
+import moveengine.collidehandler.DashItem;
 import view.ImageSet;
 
 public class SpawnDashItem extends Spawn{
 	public SpawnDashItem(int x, int y) {
-		super(x,y);
 		this.x = x;
 		this.y = y;
 		this.type = 1;
@@ -16,18 +15,12 @@ public class SpawnDashItem extends Spawn{
 	    this.collideType = SAMEACTION;
 	}
 
-	public SpawnDashItem(CollideGameComponent CGC) {
-		super(CGC);
-		allCollide = new GetDashItemStrategy();
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new DashItem(CGC);
 	}
 
 	public Image getImage() {
 		this.imageIcon = ImageSet.dashItem;
 		return this.imageIcon;
 	}
-
-	public int getTypeCode() {
-		return Spawn.SPAWNDASHITEM;
-	}
-	
 }

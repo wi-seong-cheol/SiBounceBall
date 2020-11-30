@@ -1,8 +1,11 @@
 package gamecomponents;
+
 import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import moveengine.Accel;
+import moveengine.CollideGameComponent;
+import moveengine.CollideHandler;
 /* <type>
  * Ball
  * Wall
@@ -15,15 +18,6 @@ import moveengine.Accel;
  * MoveL
  * MoveR
  */
-import moveengine.CollideGameComponent;
-import moveengine.collidestrategy.allsidecollide.AllSideCollideStrategy;
-import moveengine.collidestrategy.bottomsidecollide.BottomSideCollideStrategy;
-import moveengine.collidestrategy.bottomsidecollide.BsRegularStrategy;
-import moveengine.collidestrategy.leftsidecollide.LeftSideCollideStrategy;
-import moveengine.collidestrategy.leftsidecollide.LsRegularStrategy;
-import moveengine.collidestrategy.rightsidecollide.RightSideCollideStrategy;
-import moveengine.collidestrategy.rightsidecollide.RsRegularStrategy;
-import moveengine.collidestrategy.topsidecollide.TopSideCollideStrategy;
 
 public abstract class Spawn {
 	protected double x, y, length;
@@ -32,64 +26,13 @@ public abstract class Spawn {
 	protected ArrayList<Accel> Accelerations = new ArrayList<Accel>();
 	protected Image imageIcon;
 
-	static final int SPAWNBALL = 0;
-	static final int SPAWNBREAKABLE = 1;
-	static final int SPAWNDASHITEM = 2;
-	static final int SPAWNELECTRICITY = 3;
-	static final int SPAWNJUMP = 4;
-	static final int SPAWNJUMPITEM = 5;
-	static final int SPAWNMOVEL = 6;
-	static final int SPAWNMOVER = 7;
-	static final int SPAWNSTAR = 8;
-	static final int SPAWNTHORN = 9;
-	static final int SPAWNWALL = 10;
-
 	public int collideType; 
 	public static final int SAMEACTION = 0;
 	public static final int DIFFERACTION = 1;
 	
-	public abstract int getTypeCode();
-	protected TopSideCollideStrategy topCollide = null;
-	protected BottomSideCollideStrategy bottomCollide = null;
-	protected LeftSideCollideStrategy leftCollide = null;
-	protected RightSideCollideStrategy rightCollide = null;
-	protected AllSideCollideStrategy allCollide = null;
 	
-	protected CollideGameComponent CGC;
-	
-	public Spawn(int x, int y){}
-	
-	public Spawn(CollideGameComponent CGC) {
-		this.CGC = CGC;
-	}
-	
-	public void collideHandling() {
-		if(CGC.object.collideType == Spawn.SAMEACTION){
-			allCollide.allCollideHandler(CGC);
-		}
-		else if(CGC.collideDirection == CGC.TOP) {
-			topCollide.topCollideHandler(CGC);
-		}
-		else if(CGC.collideDirection == CGC.BOTTOM) {
-			bottomCollide.bottomCollideHandler(CGC);
-		}
-		else if(CGC.collideDirection == CGC.LEFT) {
-			leftCollide.leftCollideHandler(CGC);
-		}
-		else if(CGC.collideDirection == CGC.RIGHT) {
-			rightCollide.rightCollideHandler(CGC);
-		}
-	}
-	
-	public void setTopCollideStrategy(TopSideCollideStrategy ts) {
-		topCollide = ts;
-	}
-	
-	public void setRegularJumpApply() {
-		bottomCollide = new BsRegularStrategy();
-		leftCollide = new LsRegularStrategy();
-		rightCollide = new RsRegularStrategy();
-	}
+	public CollideHandler collideHandler;
+	public abstract void setCollideHandler(CollideGameComponent CGC);
 	
 	public void updatePos(double newX, double newY)
 	{

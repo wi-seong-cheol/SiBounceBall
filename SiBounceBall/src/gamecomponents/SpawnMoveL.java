@@ -3,12 +3,11 @@ package gamecomponents;
 import java.awt.Image;
 
 import moveengine.CollideGameComponent;
-import moveengine.collidestrategy.topsidecollide.TsLeftMoveStrategy;
+import moveengine.collidehandler.HorizontalMoveL;
 import view.ImageSet;
 
 public class SpawnMoveL extends Spawn{
 	public SpawnMoveL(int x, int y) {
-		super(x,y);
 		this.x = x;
 		this.y = y;
 		this.type = 1;
@@ -16,10 +15,8 @@ public class SpawnMoveL extends Spawn{
 		this.collideType = DIFFERACTION;
 	}
 	
-	public SpawnMoveL(CollideGameComponent CGC) {
-		super(CGC);
-		setTopCollideStrategy(new TsLeftMoveStrategy());
-		setRegularJumpApply();
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new HorizontalMoveL(CGC);
 	}
 
 	public Image getImage() {
@@ -27,7 +24,4 @@ public class SpawnMoveL extends Spawn{
 		return this.imageIcon;
 	}
 	
-	public int getTypeCode() {
-		return Spawn.SPAWNMOVEL;
-	}
 }

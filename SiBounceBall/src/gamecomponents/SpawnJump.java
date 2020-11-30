@@ -3,12 +3,11 @@ package gamecomponents;
 import java.awt.Image;
 
 import moveengine.CollideGameComponent;
-import moveengine.collidestrategy.topsidecollide.TsJumpBlockStrategy;
+import moveengine.collidehandler.JumpBlock;
 import view.ImageSet;
 
 public class SpawnJump extends Spawn{
 	public SpawnJump(int x, int y) {
-		super(x,y);
 		this.x = x;
 		this.y = y;
 		this.type = 1;
@@ -16,18 +15,12 @@ public class SpawnJump extends Spawn{
 	    this.collideType = DIFFERACTION;
 	}
 	
-	public SpawnJump(CollideGameComponent CGC) {
-		super(CGC);
-		setTopCollideStrategy(new TsJumpBlockStrategy());
-		setRegularJumpApply();
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new JumpBlock(CGC);
 	}
 	
 	public Image getImage() {
 		this.imageIcon = ImageSet.jump;
 		return this.imageIcon;
-	}
-
-	public int getTypeCode() {
-		return Spawn.SPAWNJUMP;
 	}
 }

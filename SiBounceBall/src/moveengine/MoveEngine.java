@@ -130,29 +130,23 @@ public class MoveEngine extends Thread
 		}
 		else return false;
 	}
-	
-	public double getTopSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getY() - obj.getLength()/weight - ball.getLength(); }
-	public double getDownSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getY() + obj.getLength()/weight + ball.getLength(); }
-	public double getRightSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getX() + obj.getLength()/weight + ball.getLength(); }
-	public double getLeftSideChk(Spawn obj, SpawnBall ball,int weight) { return obj.getX() - obj.getLength()/weight - ball.getLength(); }
-	
+
 	private synchronized void checkCollisions(SpawnBall ball)
 	{
 		boolean isCollision = false;
 		for (int i = 0; i < MakeGameComponents.living.size(); i++) {
 			if(i == ballIndex) continue;
-			Spawn obj = MakeGameComponents.living.get(i); if (obj == null) break;
-			if(obj.getType()==0) {
-				isCollision = checkCircle(ball, obj);
+			Spawn collideObj = MakeGameComponents.living.get(i); if (collideObj == null) break;
+			if(collideObj.getType()==0) {
+				isCollision = checkCircle(ball, collideObj);
 			}
-			else if(obj.getType()==1) {
-				isCollision = checkRect(ball, obj);
+			else if(collideObj.getType()==1) {
+				isCollision = checkRect(ball, collideObj);
 			}
 			if(isCollision) {
-				Spawn gameComponent = null;
-				CollideGameComponent CGC = new CollideGameComponent(obj,i,constForces);
-				gameComponent = objectState.setType(obj.getTypeCode(), CGC);
-				gameComponent.collideHandling();
+				CollideGameComponent CGC = new CollideGameComponent(collideObj,i,constForces);
+				collideObj.setCollideHandler(CGC);
+				collideObj.collideHandler.collideHandling();
 			}
 		}
 	}
