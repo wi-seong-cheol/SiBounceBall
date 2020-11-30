@@ -1,20 +1,20 @@
-package ui;
+package view;
 
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 
-import optimizedSBB.SBBMain;
-import service.UserService;
+import viewModel.Information;
+import viewModel.UserInput;
+//import service.UserService;
 
 class Button extends MakeUI {
 
+	Information info = new Information();
+	
 	public Button() {} 
 
 	public void buttonSet() {
@@ -32,7 +32,7 @@ class Button extends MakeUI {
 		
 		f.add(panel);
 	}
-
+	
 	private void initialScreenButtonSet() {
 		initialScreen.setBounds(10, 10, 50, 50);
         initialScreen.addMouseListener(new MouseAdapter(){
@@ -47,10 +47,8 @@ class Button extends MakeUI {
         		signUpButton.setVisible(true);
         		inputPanel.setVisible(false);
         		nicknamePanel.setVisible(true);
-        		nickNameField.setText(null);
-        		idField.setText(null);
-        		pwField.setText(null);
-        		initialScreen.setVisible(false);       		
+        		initialScreen.setVisible(false); 
+        		textFieldInit();
         	}
         });
 		buttonSet(initialScreen);
@@ -59,9 +57,15 @@ class Button extends MakeUI {
 		initialScreen.setVisible(false);
 	}
 	
+	private void textFieldInit() {
+		nickNameField.setText(null);
+		idField.setText(null);
+		pwField.setText(null);
+	}
+	
 	private void confirmButtonSet() {
 
-        UserService user = new UserService();
+//        UserService user = new UserService();
 		confirmButton.setBounds(355, 135, 90, 30);
         confirmButton.addMouseListener(new MouseAdapter(){
         	@Override
@@ -74,44 +78,35 @@ class Button extends MakeUI {
         	}
         	@Override
         	public void mousePressed(MouseEvent e) {
-        		System.out.println(loginOrSignUp);
-        		if(loginOrSignUp == 1) {
+        		UserInput inputViewModel = new UserInput();
+        		if(Information.getLoginOrSignUp() == 1) {
         			loginButton.setVisible(true);
         			signUpButton.setVisible(true);
             		inputPanel.setVisible(false);
             		initialScreen.setVisible(false);
-            		
-            		nickName = nickNameField.getText();
-            		id = idField.getText();
-            		pw = pwField.getText();
+            		inputViewModel.signUpInput();
 //            		UDao dao = new UDao();
 //            	    JoinDto dto = new JoinDto(nickName, id, pw);
 //            	    int rn = dao.join(dto);
-            		//textField 초기화 
-            		nickNameField.setText(null);
-            		idField.setText(null);
-            		pwField.setText(null);
+            		textFieldInit();
         		}
         		else {
-            		id = idField.getText();
-            		SBBMain.id = id;
-            		pw = pwField.getText();
+            		inputViewModel.loginInput();
+            		inputViewModel.login();
 //            		UDao dao = new UDao();
 //            	    LoginDto dto = new LoginDto(id, pw);
 //            	    int rn = user.login(dto);
             		int rn = 1;
 
-        			SBBMain.login = rn;
-            	    nickNameField.setText(null);
-            		idField.setText(null);
-            		pwField.setText(null);
+            		info.setLogin(rn);;
+            		textFieldInit();
             		if(rn == 1) {
 //            			SBBMain.higestLevel = user.getHighestLevel(id);
             			startButton.setVisible(true);
             			manual.setVisible(true);
             			inputPanel.setVisible(false);
                 		initialScreen.setVisible(false);
-                		stage.setText("Clear Level " + SBBMain.highestLevel);
+                		stage.setText("Clear Level " + Information.getHighLevel());
             		}
         		}
         	}
@@ -135,7 +130,7 @@ class Button extends MakeUI {
         		loginButton.setVisible(false);
         		signUpButton.setVisible(false);
         		inputPanel.setVisible(true);
-        		loginOrSignUp = 1;
+        		info.setLoginOrSignUp(1);
         		initialScreen.setVisible(true);
         	}
         });
@@ -161,7 +156,7 @@ class Button extends MakeUI {
         		signUpButton.setVisible(false);
         		nicknamePanel.setVisible(false);
         		inputPanel.setVisible(true);
-        		loginOrSignUp = 2;
+        		info.setLoginOrSignUp(2);
         		initialScreen.setVisible(true);
         	}
         });
@@ -231,7 +226,7 @@ class Button extends MakeUI {
         		stage.setVisible(true);
         		f.add(stagePanel);
         		stagePanel.setVisible(true);
-        		stage.setText("Clear Level " + SBBMain.highestLevel);
+        		stage.setText("Clear Level " + Information.getHighLevel());
             	stage.setVisible(true);
         		for(int i=0;i<4;i++) {
         			stageButton.get(i).setVisible(true);
@@ -239,7 +234,7 @@ class Button extends MakeUI {
         	}
         });
 		buttonSet(startButton);
-		if(SBBMain.login == 0)
+		if(Information.getLogin() == 0)
 			startButton.setVisible(false);
 		f.add(startButton);
 	}

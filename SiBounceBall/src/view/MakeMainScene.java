@@ -1,17 +1,23 @@
-package scenes;
+package view;
 
 import optimizedSBB.*;
 import service.*;
+import viewModel.Information;
 import dto.MapDto;
+import gamecomponents.*;
+import model.PhysicalQuantity;
+import moveengine.Accel;
+import moveengine.MoveEngine;
 
 import java.util.List;
 
 public class MakeMainScene extends Thread {
 	// 새로운 Scene 추가시 lastLevel 업데이트 필수...!!!
 	// 새로운 Scene 추가시 makeBall은 항상 맨처음에...!!
-	public static int star=1;
+	public static int star = 1;
 	private int lastLevel = 9;
-	int sceneNum = SBBMain.sceneNum;
+	Information info = new Information();
+	int sceneNum = Information.getSceneNumber();
 	int n;
 	UserService user = new UserService();
 	public static MapService map = new MapService();
@@ -20,17 +26,17 @@ public class MakeMainScene extends Thread {
 	public void run() {
 		n=sceneNum;
 		setScene();
-		drawScene();
+		buildScene();
 		while (SBBMain.isRunning) {
 			if(star == 0) {
 				n=-2;
 				setScene();
-				drawScene();
+				buildScene();
 			}
-			if(sceneNum != SBBMain.sceneNum) {
-				n=SBBMain.sceneNum;
+			if(sceneNum != Information.getSceneNumber()) {
+				n=Information.getSceneNumber();
 				setScene();
-				drawScene();
+				buildScene();
 			}
 			try {
 				sleep(1);
@@ -40,37 +46,37 @@ public class MakeMainScene extends Thread {
 	}
 	
 	public synchronized void currentStage() {
-		SBBMain.sceneNum = sceneNum;
+		info.setSceneNumber(sceneNum);
 		n = sceneNum;
 	}
 	
 	public synchronized void nextStage() {
 		if(MoveEngine.constForces.size() == 0) 
-			MoveEngine.constForces.add(new Accel(0.0, SBBMain.GRAVITY));
-		    // moveL or R 상태로 별을 다먹고 다음스테이지로 갈때 멈춤방지
+			MoveEngine.constForces.add(new Accel(0.0, PhysicalQuantity.GRAVITY));
+		// moveL or R 상태로 별을 다먹고 다음스테이지로 갈때 멈춤방지
 		if(sceneNum == lastLevel)
 			this.sceneNum = 1;
 		else {
 			System.out.println("Clear");
 			
 			this.sceneNum++;
-			if(sceneNum > SBBMain.highestLevel + 1) {
-				SBBMain.highestLevel++;
-				user.updateHighestLevel(SBBMain.id,SBBMain.highestLevel);
+			if(sceneNum > Information.getHighLevel() + 1) {
+				info.setHighLevel();
+				user.updateHighestLevel(Information.getID(),Information.getHighLevel());
 			}
 		}
-		SBBMain.sceneNum = sceneNum;
+		info.setSceneNumber(sceneNum);
 		n = sceneNum;
 	}
 	
 	public synchronized void selectedStage() {
-		this.sceneNum = SBBMain.sceneNum;
+		this.sceneNum = Information.getSceneNumber();
 	}
 	
 	public synchronized void setScene() {	
 		MakeGameComponents.living.clear();
-		SBBMain.inventory1 = false;
-		SBBMain.inventory2 = false;
+		info.setInventory1(false);
+		info.setInventory2(false);
 		
 		if(n == -1) //repaint current Level
 			currentStage();
@@ -80,19 +86,21 @@ public class MakeMainScene extends Thread {
 			selectedStage();
 	}
 	
-	public synchronized void drawScene() {
+	public synchronized void buildScene() {
 		if(n>0 && n<9) {
 			MapDto m = MapList.get(n-1);
 			int x = m.getBallX();
 			int y = m.getBallY();
-			MakeGameComponents.makeBall(x,y);
+			Spawn ball = new SpawnBall(x, y);
+			MakeGameComponents.addBlock(ball);
 			
 			star = m.getStar();
+			MakeGameComponents.setBlockType(n);
 			
 			for(int j=0; j<20; j++) {
 				char[] rowToChar = m.getRow(j).toCharArray();
 				for(int i=0; i<26; i++) {
-					MakeScene.makeScene(rowToChar[i], i, j);
+					MakeGameComponents.makeScene(rowToChar[i], i*30, j*30);
 				}
 			}
 		}

@@ -1,22 +1,43 @@
-package ui;
+package view;
 
 import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import optimizedSBB.MyKeyListener;
 import optimizedSBB.SBBMain;
+import viewModel.Information;
+import viewModel.MyKeyListener;
 
-public class StageFrame extends SBBMain {
+public class StageFrame {
+	public static MyKeyListener keyListener;
+	public static final String TITLE = "SibounceBall";
+	public static JFrame f;
+	public static Canvas c;
+	public static BufferStrategy b;
+	public static GraphicsEnvironment ge;
+	public static GraphicsDevice gd;
+	public static GraphicsConfiguration gc;
+	public static BufferedImage buffer;
+	public static Graphics graphics;
+	public static Graphics2D g2d;
+	public static AffineTransform at = new AffineTransform();
 	private static JButton menu = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/menu.png")));
 	private static JButton back = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/back.png")));
 	private static JButton main = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/main.png")));
 	private static JButton exit = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/exit.png")));
+	Information info = new Information();
 	
 	public StageFrame() { }
 	public void initializeJFrame()	{
@@ -32,7 +53,7 @@ public class StageFrame extends SBBMain {
 		c = new Canvas(); // 화면
 		// 캔버스를 새로 만드는거.
 		c.setIgnoreRepaint(true);
-		c.setSize(X, Y);
+		c.setSize(Information.getX(), Information.getY());
 
 		menuButtonSet();
 		mainButtonSet();
@@ -47,7 +68,7 @@ public class StageFrame extends SBBMain {
 		gd = ge.getDefaultScreenDevice();
 		gc = gd.getDefaultConfiguration();
 		// Create off-screen drawing surface
-		buffer = gc.createCompatibleImage(X, Y);
+		buffer = gc.createCompatibleImage(Information.getX(), Information.getY());
 		// Objects needed for rendering...
 		graphics = null;
 		g2d = null;
@@ -61,7 +82,7 @@ public class StageFrame extends SBBMain {
 			public void mousePressed(MouseEvent e) {
 				f.setFocusable(false);
 				back.setFocusable(true);
-				click=1;
+				info.setClickState(1);
 				main.setVisible(true);
 				exit.setVisible(true);
 				back.setVisible(true);
@@ -82,13 +103,13 @@ public class StageFrame extends SBBMain {
 				f.setFocusable(true);
 				back.setFocusable(false);
 				MakeUI.f.setVisible(true);
-				MakeUI.stage.setText("Clear Level " + SBBMain.highestLevel);
+				MakeUI.stage.setText("Clear Level " + Information.getHighLevel());
 				main.setVisible(false);
 				exit.setVisible(false);
 				back.setVisible(false);
 				menu.setVisible(true);
 				f.setVisible(false);
-				sceneNum=0;
+				info.setSceneNumber(0);
 			}
 		});
 		main.setContentAreaFilled(false);
@@ -118,7 +139,7 @@ public class StageFrame extends SBBMain {
 			public void mousePressed(MouseEvent e) {
 				f.setFocusable(true);
 				back.setFocusable(false);
-				click=0;
+				info.setClickState(0);
 				main.setVisible(false);
 				exit.setVisible(false);
 				back.setVisible(false);

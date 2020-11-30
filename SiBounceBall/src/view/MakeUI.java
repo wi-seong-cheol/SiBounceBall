@@ -1,18 +1,14 @@
-package ui;
+package view;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.*;
-
-import dao.*;
-import dto.*;
 import optimizedSBB.SBBMain;
-import service.*;
+import viewModel.Information;
 
-public class MakeUI extends JFrame {
+public class MakeUI {
 	
 	public static JFrame f = new JFrame();
 
@@ -31,12 +27,12 @@ public class MakeUI extends JFrame {
 	protected JButton initialScreen = new JButton(new ImageIcon(SBBMain.class.getResource("../Image/back.png")));
 	
 	protected int stageNum=1;
-	public static int loginOrSignUp = 0;
-	protected static String nickName = new String();
-	protected String id = new String();
-	protected String pw = new String();
     protected static int i;
     public static JLabel stage = new JLabel();
+
+    public static JTextField nickNameField = new JTextField(10);
+    public static JTextField idField = new JTextField(10);
+    public static JPasswordField pwField = new JPasswordField(10);
     
 	MyPanel panel = new MyPanel();
     Stage stagePanel = new Stage();
@@ -45,14 +41,12 @@ public class MakeUI extends JFrame {
     JPanel nicknamePanel = new JPanel();
     JPanel idPanel = new JPanel();
     JPanel passwordPanel = new JPanel();
-    JTextField nickNameField = new JTextField(10);
-    JTextField idField = new JTextField(10);
-    JPasswordField pwField = new JPasswordField(10);
     JLabel nickNameText = new JLabel();
     JLabel idText = new JLabel();
     JLabel pwText = new JLabel();
     JButton confirmButton = new JButton("Confirm");
-
+    Information info = new Information();
+    
 	public MakeUI() {}
 	
 	public void MakeScene() {
@@ -71,8 +65,8 @@ public class MakeUI extends JFrame {
 		stage.setFont(stage.getFont().deriveFont(15.0f));
 		f.add(stage);		
 
-		MakeUI test = new Button();
-		((Button) test).buttonSet();
+		MakeUI btn = new Button();
+		((Button) btn).buttonSet();
 		f.setVisible(true);
     }
 	
@@ -96,9 +90,9 @@ public class MakeUI extends JFrame {
 		stageButton.get(N).addMouseListener(new MouseAdapter(){
         	@Override
         	public void mousePressed(MouseEvent e) {
-        		if(SBBMain.highestLevel + 1 > N) {
-        			SBBMain.sceneNum = N+1;
-        			SBBMain.f.setVisible(true);
+        		if(Information.getHighLevel() + 1 > N) {
+        			info.setSceneNumber(N+1);
+        			StageFrame.f.setVisible(true);
         			f.setVisible(false);
         		}
         	}
