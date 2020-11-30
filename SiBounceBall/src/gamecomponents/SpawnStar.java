@@ -10,6 +10,7 @@ public class SpawnStar extends Spawn{
 	public SpawnStar(int x, int y) {
 		super(x,y);
 		this.x = x;
+//<<<<<<< HEAD
 		this.y = y;
 		this.type = 1;
 		this.length = 30;

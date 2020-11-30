@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import view.ImageSet;
 import moveengine.Accel;
 
-public class SpawnBall extends Spawn{
+public class SpawnBall extends Spawn
+{
 	public static double vx, vy; // 싱글톤 사용하지 않고 static vx, vy사용한 이유 : 여러개의 공 충돌구현 때문에 싱글톤X함
 	public int startX, startY;
 	private ArrayList<Accel> Accelerations = new ArrayList<Accel>();

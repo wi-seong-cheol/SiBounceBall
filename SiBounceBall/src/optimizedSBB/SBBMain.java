@@ -17,6 +17,7 @@ public class SBBMain {
 		StageFrame stageFrame = new StageFrame();
 		Animation animation = new Animation();
 		MakeUI makeUI = new MakeUI();
+		
 		stageFrame.initializeJFrame();
 		makeUI.MakeScene();
 		moveEngine.start();
