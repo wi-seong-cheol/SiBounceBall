@@ -103,7 +103,7 @@ public class Animation extends SBBMain{
 	  }
 	  
 	  public static void drawBackground(int backNum){
-			g2d.drawImage(background.get(backNum), 0,0, null);
+			g2d.drawImage(ImageSet.background.get(backNum), 0,0, null);
 	  }
 	  
 
@@ -161,37 +161,37 @@ public class Animation extends SBBMain{
 	  
 	  public static void drawObjImage(Spawn s){
 		  if(s instanceof SpawnBall) { 
-	    	  g2d.drawImage(sibaball2,(int) (s.getX() )+4,(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.sibaball2,(int) (s.getX() )+4,(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnWall){
-	    	  g2d.drawImage(wallImage.get(s.num-1),(int) (s.getX() ),(int) (s.getY() ), c);            	  
+	    	  g2d.drawImage(ImageSet.wallImage.get(s.num-1),(int) (s.getX() ),(int) (s.getY() ), c);            	  
 	      }
 	      else if(s instanceof SpawnThorn) {
-	    	  g2d.drawImage(thorn.get(s.num-1),(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.thorn.get(s.num-1),(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnJump) {
-	    	  g2d.drawImage(jump,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.jump,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnElectricity) {
-	    	  g2d.drawImage(electricity,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.electricity,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnDashItem) {
-	    	  g2d.drawImage(item1,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.dashItem,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnJumpItem) {
-	    	  g2d.drawImage(item2,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.jumpItem,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnStar) {
-	    	  g2d.drawImage(star,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.star,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnBreakable) {
-	    	  g2d.drawImage(breakable,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.breakable,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnMoveL) {
-	    	  g2d.drawImage(moveL,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.moveL,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	      else if(s instanceof SpawnMoveR) {
-	    	  g2d.drawImage(moveR,(int) (s.getX() ),(int) (s.getY() ), c);
+	    	  g2d.drawImage(ImageSet.moveR,(int) (s.getX() ),(int) (s.getY() ), c);
 	      }
 	  }
 

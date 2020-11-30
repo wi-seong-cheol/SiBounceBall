@@ -66,26 +66,13 @@ public class SBBMain
 	private static Thread moveEngine = new MoveEngine();
 	private static Thread makeMainScene = new MakeMainScene();
 
-	public static Image sibaball;
-	public static Image sibaball2;
-	public static ArrayList<Image> background = new ArrayList<Image>();
-	public static ArrayList<Image> wallImage = new ArrayList<Image>();
-	public static ArrayList<Image> thorn = new ArrayList<Image>();
-	public static Image jump;
-	public static Image item1;
-	public static Image item2;
-	public static Image star;
-	public static Image breakable;
-	public static Image moveL;
-	public static Image moveR;
-	public static Image electricity;
-
 	public static void main(String[] args)
 	{
 		// Initialize some things.
 		StageFrame stageFrame = new StageFrame();
 		Animation animation = new Animation();
 		MakeUI makeUI = new MakeUI();
+		
 		stageFrame.initializeJFrame();
 		makeUI.MakeScene();
 		moveEngine.start();
