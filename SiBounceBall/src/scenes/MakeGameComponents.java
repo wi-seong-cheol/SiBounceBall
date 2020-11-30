@@ -77,4 +77,5 @@ public class MakeGameComponents {
 			addBlock(elements);
 		}
 	}
+	
 }
