@@ -6,14 +6,23 @@ import moveengine.CollideGameComponent;
 import moveengine.collidehandler.Electricity;
 import view.ImageSet;
 
-public class SpawnElectricity extends Spawn
-{ 
+public class SpawnElectricity extends Spawn{
+	public SpawnElectricity() {}
+	
 	public SpawnElectricity(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.type = 0;
 		this.length = 15.0;
 		this.collideType = SAMEACTION;
+	}
+	
+	public static SpawnElectricity newInstance() {
+		return new SpawnElectricity();
+	}
+	
+	public SpawnElectricity getInstance(int x, int y, int n) {
+		return new SpawnElectricity(x, y);
 	}
 	
 	 public void setCollideHandler(CollideGameComponent CGC) { 
@@ -25,7 +34,7 @@ public class SpawnElectricity extends Spawn
 		return this.imageIcon;
 	}
 
-	public double getX1() //(X1, Y1)-> 좌상 점좌표
+	public double getX1() //(X1, Y1)-> 醫뚯긽 �젏醫뚰몴
 	{
 		return this.x - length;
 	}
@@ -35,7 +44,7 @@ public class SpawnElectricity extends Spawn
 		return this.y - length;
 	}
 
-	public double getX2() //(X2, Y2)-> 우하 점좌표
+	public double getX2() //(X2, Y2)-> �슦�븯 �젏醫뚰몴
 	{
 		return this.x + length;
 	}

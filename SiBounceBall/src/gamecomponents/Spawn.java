@@ -11,8 +11,8 @@ import moveengine.CollideHandler;
  * Wall
  * Jump
  * Thorn
- * Item1 : 앞대쉬 -> 좌or우키 누른상태에서 up키입력
- * Item2 : 점프 -> spacebar 입력
+ * Item1 : �븵���돩 -> 醫똮r�슦�궎 �늻瑜몄긽�깭�뿉�꽌 up�궎�엯�젰
+ * Item2 : �젏�봽 -> spacebar �엯�젰
  * Star
  * Breakable
  * MoveL
@@ -21,8 +21,8 @@ import moveengine.CollideHandler;
 
 public abstract class Spawn {
 	protected double x, y, length;
-	protected int type; // check collide 기준이 원인지 사각형인지 구분. 0 : 원, 1 : 사각형
-	public int num=0; // 이미지 개수가 여러개인 obj만 사용
+	protected int type; // check collide 湲곗��씠 �썝�씤吏� �궗媛곹삎�씤吏� 援щ텇. 0 : �썝, 1 : �궗媛곹삎
+	public int num=0; // �씠誘몄� 媛쒖닔媛� �뿬�윭媛쒖씤 obj留� �궗�슜
 	protected ArrayList<Accel> Accelerations = new ArrayList<Accel>();
 	protected Image imageIcon;
 
@@ -33,6 +33,15 @@ public abstract class Spawn {
 	
 	public CollideHandler collideHandler;
 	public abstract void setCollideHandler(CollideGameComponent CGC);
+	
+	public static Spawn newInstance() {
+		return null;
+	}
+	
+	public Spawn getInstance(int x, int y, int n) {
+		System.out.println("??");
+		return null;
+	}
 	
 	public void updatePos(double newX, double newY)
 	{
@@ -54,12 +63,12 @@ public abstract class Spawn {
 		return this.type;
 	}
 
-	public Point2D getCenter() // 중심좌표 
+	public Point2D getCenter() // 以묒떖醫뚰몴 
 	{
 		return new Point2D.Double(this.x, this.y);
 	}
 
-	public double getX() // (X, Y)-> 중점 좌표
+	public double getX() // (X, Y)-> 以묒젏 醫뚰몴
 	{
 		return this.x;
 	}
@@ -69,7 +78,7 @@ public abstract class Spawn {
 		return this.y;
 	}
 
-	public double getX1() //(X1, Y1)-> 좌,상 점좌표
+	public double getX1() //(X1, Y1)-> 醫�,�긽 �젏醫뚰몴
 	{
 		return this.x - length/2;
 	}
@@ -79,7 +88,7 @@ public abstract class Spawn {
 		return this.y - length/2;
 	}
 
-	public double getX2() //(X2, Y2)-> 우,하 점좌표
+	public double getX2() //(X2, Y2)-> �슦,�븯 �젏醫뚰몴
 	{
 		return this.x + length/2;
 	}

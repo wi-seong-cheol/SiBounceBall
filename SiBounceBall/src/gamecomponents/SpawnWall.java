@@ -4,6 +4,8 @@ import moveengine.CollideGameComponent;
 import moveengine.collidehandler.Wall;
 
 public class SpawnWall extends Spawn {
+	public SpawnWall() {}
+	
 	public SpawnWall(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -16,6 +18,14 @@ public class SpawnWall extends Spawn {
 	{
 		this(x,y);
 		this.num = n;
+	}
+	
+	public static SpawnWall newInstance() {
+		return new SpawnWall();
+	}
+	
+	public SpawnWall getInstance(int x, int y, int n) {
+		return new SpawnWall(x, y, n);
 	}
 	
 	public void setCollideHandler(CollideGameComponent CGC) { 
