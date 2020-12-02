@@ -24,25 +24,26 @@ public class MakeMainScene extends Thread {
 	public static List<MapDto> MapList = map.getMapList();
 	
 	public void run() {
-		n=sceneNum;
-		setScene();
-		buildScene();
+		runScene(0);
 		while (SBBMain.isRunning) {
 			if(star == 0) {
-				n=-2;
-				setScene();
-				buildScene();
+				runScene(1);
 			}
 			if(sceneNum != Information.getSceneNumber()) {
-				n=Information.getSceneNumber();
-				setScene();
-				buildScene();
+				runScene(2);
 			}
 			try {
 				sleep(1);
 			} catch (InterruptedException e) {
 			}
 		}
+	}
+	
+	public void runScene(int i) {
+		int[] sceneNumber= {sceneNum, -2, Information.getSceneNumber()};
+		n=sceneNumber[i];
+		setScene();
+		buildScene();
 	}
 	
 	public synchronized void currentStage() {
@@ -105,4 +106,5 @@ public class MakeMainScene extends Thread {
 			}
 		}
 	}
+	
 }
