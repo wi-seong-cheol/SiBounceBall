@@ -8,7 +8,6 @@ public class MakeGameComponents {
 	public static int blockImage;
 	private static String[] blockTypeStr = {"Wall", "Jump", "Thorn", "Electricity", "DashItem", "JumpItem", "Star", "Breakable", "MoveL", "MoveR"};
 	private static String str = "gamecomponents.Spawn";
-	
 	static final int STAGE1=1;
 	static final int STAGE2=2;
 	static final int STAGE3=3;

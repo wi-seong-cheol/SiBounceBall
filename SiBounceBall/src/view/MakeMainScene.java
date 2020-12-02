@@ -106,4 +106,5 @@ public class MakeMainScene extends Thread {
 			}
 		}
 	}
+	
 }
