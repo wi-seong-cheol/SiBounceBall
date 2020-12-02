@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import view.ImageSet;
 import moveengine.Accel;
+import moveengine.CollideGameComponent;
 
 public class SpawnBall extends Spawn
 {
@@ -12,8 +13,7 @@ public class SpawnBall extends Spawn
 	private ArrayList<Accel> Accelerations = new ArrayList<Accel>();
 
 	public SpawnBall(int x, int y) {
-		super(x,y);
-		this.x = x+4;
+		this.x = x;
 		this.y = y;
 		this.startX = x;
 		this.startY = y;
@@ -24,10 +24,8 @@ public class SpawnBall extends Spawn
 		this.collideType = DIFFERACTION;
 	}
 
-	public int getTypeCode() {
-		return Spawn.SPAWNBALL;
-	}
-
+	public void setCollideHandler(CollideGameComponent CGC) { }
+	
 	public Image getImage() {
 		this.imageIcon = ImageSet.sibaball;
 		return this.imageIcon;

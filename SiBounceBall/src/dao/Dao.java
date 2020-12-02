@@ -161,7 +161,7 @@ public class Dao {
 		
 		if (rs.next()) {
 			int level = rs.getInt("levelNum");
-			int star  = rs.getInt("star");
+			int star  = rs.getInt("starNum");
 			int ballX = rs.getInt("ballX");
 			int ballY = rs.getInt("ballY");
 			String[] rows = new String[20];

@@ -3,12 +3,13 @@ package gamecomponents;
 import java.awt.Image;
 
 import moveengine.CollideGameComponent;
-import moveengine.collidestrategy.allsidecollide.GetJumpItemStrategy;
+import moveengine.collidehandler.JumpItem;
 import view.ImageSet;
 
 public class SpawnJumpItem extends Spawn{
+	public SpawnJumpItem() {}
+	
 	public SpawnJumpItem(int x, int y) {
-		super(x,y);
 		this.x = x;
 		this.y = y;
 		this.type = 1;
@@ -16,9 +17,16 @@ public class SpawnJumpItem extends Spawn{
 		this.collideType = SAMEACTION;
 	}
 	
-	public SpawnJumpItem(CollideGameComponent CGC) {
-		super(CGC);
-		allCollide = new GetJumpItemStrategy();
+	public static SpawnJumpItem newInstance() {
+		return new SpawnJumpItem();
+	}
+	
+	public SpawnJumpItem getInstance(int x, int y, int n) {
+		return new SpawnJumpItem(x, y);
+	}
+	
+	public void setCollideHandler(CollideGameComponent CGC) { 
+		this.collideHandler = new JumpItem(CGC);
 	}
 
 	public Image getImage() {
@@ -26,7 +34,4 @@ public class SpawnJumpItem extends Spawn{
 		return this.imageIcon;
 	}
 
-	public int getTypeCode() {
-		return Spawn.SPAWNJUMPITEM;
-	}
 }

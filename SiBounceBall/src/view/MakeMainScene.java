@@ -12,8 +12,8 @@ import moveengine.MoveEngine;
 import java.util.List;
 
 public class MakeMainScene extends Thread {
-	// 새로운 Scene 추가시 lastLevel 업데이트 필수...!!!
-	// 새로운 Scene 추가시 makeBall은 항상 맨처음에...!!
+	// �깉濡쒖슫 Scene 異붽��떆 lastLevel �뾽�뜲�씠�듃 �븘�닔...!!!
+	// �깉濡쒖슫 Scene 異붽��떆 makeBall�� �빆�긽 留⑥쿂�쓬�뿉...!!
 	public static int star = 1;
 	private int lastLevel = 9;
 	Information info = new Information();
@@ -53,7 +53,7 @@ public class MakeMainScene extends Thread {
 	public synchronized void nextStage() {
 		if(MoveEngine.constForces.size() == 0) 
 			MoveEngine.constForces.add(new Accel(0.0, PhysicalQuantity.GRAVITY));
-		// moveL or R 상태로 별을 다먹고 다음스테이지로 갈때 멈춤방지
+		// moveL or R �긽�깭濡� 蹂꾩쓣 �떎癒밴퀬 �떎�쓬�뒪�뀒�씠吏�濡� 媛덈븣 硫덉땄諛⑹�
 		if(sceneNum == lastLevel)
 			this.sceneNum = 1;
 		else {
