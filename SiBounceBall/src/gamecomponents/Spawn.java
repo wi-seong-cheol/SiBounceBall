@@ -6,23 +6,11 @@ import java.util.ArrayList;
 import moveengine.Accel;
 import moveengine.CollideGameComponent;
 import moveengine.CollideHandler;
-/* <type>
- * Ball
- * Wall
- * Jump
- * Thorn
- * Item1 : �븵���돩 -> 醫똮r�슦�궎 �늻瑜몄긽�깭�뿉�꽌 up�궎�엯�젰
- * Item2 : �젏�봽 -> spacebar �엯�젰
- * Star
- * Breakable
- * MoveL
- * MoveR
- */
 
 public abstract class Spawn {
 	protected double x, y, length;
-	protected int type; // check collide 湲곗��씠 �썝�씤吏� �궗媛곹삎�씤吏� 援щ텇. 0 : �썝, 1 : �궗媛곹삎
-	public int num=0; // �씠誘몄� 媛쒖닔媛� �뿬�윭媛쒖씤 obj留� �궗�슜
+	protected int type; 
+	public int num=0; 
 	protected ArrayList<Accel> Accelerations = new ArrayList<Accel>();
 	protected Image imageIcon;
 
@@ -63,12 +51,12 @@ public abstract class Spawn {
 		return this.type;
 	}
 
-	public Point2D getCenter() // 以묒떖醫뚰몴 
+	public Point2D getCenter() 
 	{
 		return new Point2D.Double(this.x, this.y);
 	}
 
-	public double getX() // (X, Y)-> 以묒젏 醫뚰몴
+	public double getX() 
 	{
 		return this.x;
 	}
@@ -78,7 +66,7 @@ public abstract class Spawn {
 		return this.y;
 	}
 
-	public double getX1() //(X1, Y1)-> 醫�,�긽 �젏醫뚰몴
+	public double getX1() 
 	{
 		return this.x - length/2;
 	}
@@ -88,7 +76,7 @@ public abstract class Spawn {
 		return this.y - length/2;
 	}
 
-	public double getX2() //(X2, Y2)-> �슦,�븯 �젏醫뚰몴
+	public double getX2() 
 	{
 		return this.x + length/2;
 	}

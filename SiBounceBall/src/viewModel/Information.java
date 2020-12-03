@@ -73,4 +73,8 @@ public class Information {
 	public static int getY() {
 		return PhysicalQuantity.Y;
 	}
+	
+	public static double getGravity() {
+		return PhysicalQuantity.GRAVITY;
+	}
 }
