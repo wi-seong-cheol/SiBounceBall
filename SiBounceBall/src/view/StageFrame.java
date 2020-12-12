@@ -16,9 +16,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import optimizedSBB.SBBMain;
 import viewModel.Information;
 import viewModel.MyKeyListener;
+import viewModel.SBBMain;
 
 public class StageFrame {
 	public static MyKeyListener keyListener;

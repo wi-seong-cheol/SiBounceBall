@@ -2,8 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-import gamecomponents.*;
-import moveengine.Accel;
+import viewModel.gamecomponents.*;
+import viewModel.moveengine.Accel;
 
 public class PhysicalQuantity {
 	public static SpawnBall ball;

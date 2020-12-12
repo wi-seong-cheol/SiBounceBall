@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import optimizedSBB.SBBMain;
+import viewModel.SBBMain;
 
 public class ImageSet extends SBBMain {
 	public ImageSet() {};

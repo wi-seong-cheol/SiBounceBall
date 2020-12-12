@@ -3,10 +3,10 @@ package viewModel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import gamecomponents.*;
 import model.*;
-import moveengine.Accel;
-import moveengine.MoveEngine;
+import viewModel.gamecomponents.*;
+import viewModel.moveengine.Accel;
+import viewModel.moveengine.MoveEngine;
 
 public class MyKeyListener implements KeyListener {
 

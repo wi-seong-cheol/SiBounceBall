@@ -1,16 +1,21 @@
 package view;
 
-import optimizedSBB.*;
-import service.*;
+import viewModel.*;
 import viewModel.Information;
-import dto.MapDto;
-import gamecomponents.*;
-import moveengine.Accel;
-import moveengine.MoveEngine;
+import viewModel.SBBMain;
+import viewModel.gamecomponents.*;
+import viewModel.moveengine.Accel;
+import viewModel.moveengine.MoveEngine;
+import model.PhysicalQuantity;
+import model.service.*;
 
 import java.util.List;
 
+import database.dto.MapDto;
+
 public class MakeMainScene extends Thread {
+	// �깉濡쒖슫 Scene 異붽��떆 lastLevel �뾽�뜲�씠�듃 �븘�닔...!!!
+	// �깉濡쒖슫 Scene 異붽��떆 makeBall�� �빆�긽 留⑥쿂�쓬�뿉...!!
 	public static int star = 1;
 	private int lastLevel = 9;
 	Information info = new Information();
@@ -21,25 +26,26 @@ public class MakeMainScene extends Thread {
 	public static List<MapDto> MapList = map.getMapList();
 	
 	public void run() {
-		n=sceneNum;
-		setScene();
-		buildScene();
+		runScene(0);
 		while (SBBMain.isRunning) {
 			if(star == 0) {
-				n=-2;
-				setScene();
-				buildScene();
+				runScene(1);
 			}
 			if(sceneNum != Information.getSceneNumber()) {
-				n=Information.getSceneNumber();
-				setScene();
-				buildScene();
+				runScene(2);
 			}
 			try {
 				sleep(1);
 			} catch (InterruptedException e) {
 			}
 		}
+	}
+	
+	public void runScene(int i) {
+		int[] sceneNumber= {sceneNum, -2, Information.getSceneNumber()};
+		n=sceneNumber[i];
+		setScene();
+		buildScene();
 	}
 	
 	public synchronized void currentStage() {
@@ -49,7 +55,8 @@ public class MakeMainScene extends Thread {
 	
 	public synchronized void nextStage() {
 		if(MoveEngine.constForces.size() == 0) 
-			MoveEngine.constForces.add(new Accel(0.0, Information.getGravity()));
+			MoveEngine.constForces.add(new Accel(0.0, PhysicalQuantity.GRAVITY));
+		// moveL or R �긽�깭濡� 蹂꾩쓣 �떎癒밴퀬 �떎�쓬�뒪�뀒�씠吏�濡� 媛덈븣 硫덉땄諛⑹�
 		if(sceneNum == lastLevel)
 			this.sceneNum = 1;
 		else {
@@ -101,4 +108,5 @@ public class MakeMainScene extends Thread {
 			}
 		}
 	}
+	
 }

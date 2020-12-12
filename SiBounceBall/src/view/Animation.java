@@ -1,8 +1,8 @@
 package view;
 
-import gamecomponents.*;
-import optimizedSBB.SBBMain;
 import viewModel.Information;
+import viewModel.SBBMain;
+import viewModel.gamecomponents.*;
 
 import java.awt.Color;
 import java.awt.Font;

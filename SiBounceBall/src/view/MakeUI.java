@@ -5,8 +5,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import optimizedSBB.SBBMain;
+
 import viewModel.Information;
+import viewModel.SBBMain;
 
 public class MakeUI {
 	
